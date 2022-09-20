@@ -1,0 +1,82 @@
+﻿@page "/relation"
+@using PracticeProject.Models
+@using PracticeProject.Resources
+
+<RadzenTemplateForm Data="@_person" OnInvalidSubmit="@AddNewRelation">
+	<div class="container-fluid">
+		<div class="row">
+			<h3>Person Info</h3>
+			<div class="col-md-6">
+				<RadzenFieldset>
+					<div class="row">
+						<div class="col-md-3 align-items-center d-flex">
+							<RadzenLabel Text="@StringResource.Person" />
+						</div>
+						<div class="col-md-8">
+							<RadzenDropDown @bind-Value="_person.FirstName" AllowClear="true" Placeholder="Select person"
+											Data="@people" style="width: 100%;" TextProperty="FirstName" ValueProperty="PersonId" Name="PersonId">
+							</RadzenDropDown>
+						</div>
+					</div>
+
+					<p>This person is what in relation to the other person</p>
+
+					<div class="row">
+						<div class="col-md-3 align-items-center d-flex">
+							<RadzenLabel Text="@StringResource.Relation" />
+						</div>
+						<div class="col-md-8">
+							<RadzenTextBox Style="width: 100%" Name="RelationType" />
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-3 align-items-center d-flex">
+							<RadzenLabel Text="@StringResource.Person" />
+						</div>
+						<div class="col-md-8">
+							<RadzenDropDown @bind-Value="_person.FirstName" AllowClear="true" Placeholder="Select person"
+											Data="@people" style="width: 100%;" TextProperty="FirstName" ValueProperty="PersonId" Name="PersonId">
+							</RadzenDropDown>
+						</div>
+					</div>
+				</RadzenFieldset>
+
+			</div>
+			<div class="row ">
+				<div class="col-md-6 d-flex align-items-end justify-content-center" style="margin-top: 16px;">
+					<RadzenButton class="formButton" ButtonType="ButtonType.Submit" Icon="save" Text="Save" />
+					<RadzenButton ButtonStyle="ButtonStyle.Light" Icon="cancel" style="display: inline-block; margin-left: 10px;" Text="Cancel" Click="@Cancel" />
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</RadzenTemplateForm>
+
+
+@code {
+	public Person _person;
+
+	public IEnumerable<Person> people;
+
+	public Relation _relation;
+
+	protected override async Task OnInitializedAsync()
+	{
+		_person = new();
+		_relation = new();
+	}
+
+	public void AddNewRelation()
+	{
+
+	}
+
+	public void Cancel()
+	{
+		//do something
+	}
+}
+

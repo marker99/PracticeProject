@@ -132,10 +132,16 @@
   <data name="LastName" xml:space="preserve">
     <value>Last Name</value>
   </data>
+  <data name="Person" xml:space="preserve">
+    <value>Person</value>
+  </data>
   <data name="PersonInfo" xml:space="preserve">
     <value>Person Info</value>
   </data>
   <data name="PhoneNumber" xml:space="preserve">
     <value>PhoneNumber</value>
+  </data>
+  <data name="Relation" xml:space="preserve">
+    <value>Relation</value>
   </data>
 </root>

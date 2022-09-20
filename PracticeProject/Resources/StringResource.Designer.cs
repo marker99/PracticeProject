@@ -106,6 +106,15 @@ namespace PracticeProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Person.
+        /// </summary>
+        internal static string Person {
+            get {
+                return ResourceManager.GetString("Person", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Person Info.
         /// </summary>
         internal static string PersonInfo {
@@ -120,6 +129,15 @@ namespace PracticeProject.Resources {
         internal static string PhoneNumber {
             get {
                 return ResourceManager.GetString("PhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Relation.
+        /// </summary>
+        internal static string Relation {
+            get {
+                return ResourceManager.GetString("Relation", resourceCulture);
             }
         }
     }
