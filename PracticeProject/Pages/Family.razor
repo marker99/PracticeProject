@@ -1,0 +1,27 @@
+﻿@page "/family"
+@using PracticeProject.Components
+@using PracticeProject.Models
+@using PracticeProject.Resources
+
+<PageTitle>Family</PageTitle>
+
+<select @onchange="onChange">
+	<option value="@nameof(AddPersonComponent)">
+		@nameof(AddPersonComponent)
+	</option>
+</select>
+
+<br />
+<br />
+
+<DynamicComponent Type="selectedType" />
+
+@code {
+	Type selectedType = typeof(AddPersonComponent);
+
+	public void onChange(ChangeEventArgs changeEventArgs)
+	{
+		selectedType = Type.GetType($"PracticeProject.Components.{changeEventArgs.Value}");
+	}
+
+}
