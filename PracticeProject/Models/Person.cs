@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Radzen.Blazor;
+using System.ComponentModel.DataAnnotations;
 
 namespace PracticeProject.Models
 {
@@ -19,13 +20,14 @@ namespace PracticeProject.Models
         [Required, Range(1,122, ErrorMessage = "Please enter an age between 1 - 122")]
         public int Age { get; set; }
 
-        [RegularExpression(@"\D+", ErrorMessage = "Invalid value")]
-        [Required]
-        public string Gender;
+        public string Gender { get; set; }
 
         public string Address { get; set; }
 
         public string PhoneNumber { get; set; }
+
+        public List<Relation> Person1Relations { get; set; }
+        public List<Relation> Person2Relations { get; set; }
 
     }
 }

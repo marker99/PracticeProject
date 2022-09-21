@@ -16,5 +16,10 @@ namespace PracticeProject.Data.Implementations
         {
             return await _personRepository.AddNewPersonAsync(person);
         }
+
+        public async Task<IList<Person>> GetAllPersons()
+        {
+            return await _personRepository.GetAllPersonsAsync();
+        }
     }
 }

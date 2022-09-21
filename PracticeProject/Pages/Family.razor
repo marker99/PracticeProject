@@ -1,16 +1,18 @@
 ﻿@page "/family"
 @using PracticeProject.Components
-@using PracticeProject.Models
-@using PracticeProject.Resources
 
 <PageTitle>Family</PageTitle>
 
-<select @onchange="onChange">
-	<option value="@nameof(AddPersonComponent)">
-		@nameof(AddPersonComponent)
-	</option><option value="@nameof(RelationComponent)">
-		@nameof(RelationComponent)
-	</option>
+<select @onchange="OnChange">
+    <option value="@nameof(AddPersonComponent)">
+        @nameof(AddPersonComponent)
+    </option>
+    <option value="@nameof(RelationComponent)">
+        @nameof(RelationComponent)
+    </option>
+    <option value="@nameof(PeopleComponent)">
+        @nameof(PeopleComponent)
+    </option>
 </select>
 
 <br />
@@ -19,11 +21,12 @@
 <DynamicComponent Type="selectedType" />
 
 @code {
-	Type selectedType = typeof(AddPersonComponent);
+    
+    Type selectedType = typeof(AddPersonComponent);
 
-	public void onChange(ChangeEventArgs changeEventArgs)
-	{
-		selectedType = Type.GetType($"PracticeProject.Components.{changeEventArgs.Value}");
-	}
+    public void OnChange(ChangeEventArgs changeEventArgs)
+    {
+        selectedType = Type.GetType($"PracticeProject.Components.{changeEventArgs.Value}");
+    }
 
 }

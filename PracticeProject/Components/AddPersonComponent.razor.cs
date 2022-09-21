@@ -17,7 +17,7 @@ namespace PracticeProject.Components
         public void AddNewPerson()
         {
             _personHandler.AddNewPerson(newPerson);
-            _navMgr.NavigateTo("/family");
+            _navMgr.NavigateTo("/people");
         }
 
         public void Cancel()

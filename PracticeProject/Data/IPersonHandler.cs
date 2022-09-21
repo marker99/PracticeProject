@@ -6,5 +6,7 @@ namespace PracticeProject.Data
     {
         public Task<Person> AddNewPerson(Person person);
 
+        public Task<IList<Person>> GetAllPersons();
+
     }
 }

@@ -1,0 +1,29 @@
+﻿@page "/dummy"
+
+@using PracticeProject.Database
+@using PracticeProject.Models
+@using PracticeProject.Repositories
+@using PracticeProject.Repositories.Implementations
+
+@inject IPersonRepository _personRepository
+@inject NavigationManager _navMgr
+
+<h3>Just a page used for adding dummy data</h3>
+
+<RadzenButton class="formButton" ButtonType="ButtonType.Submit" Icon="add_circle_outline" Text="Add Dummy Data" Click="@AddData" />
+
+@code {
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+    }
+
+    public void AddData()
+    {
+        _personRepository.CreatePeopleAndPopulateDb();
+        _navMgr.NavigateTo("/family");
+    }
+
+}

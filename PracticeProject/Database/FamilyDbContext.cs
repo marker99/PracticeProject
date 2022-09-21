@@ -23,7 +23,17 @@ namespace PracticeProject.Database
         //For configuring model properties using Fluent API (fx the only way to do composite keys)
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Relation>()
+                .HasOne(x => x.person1)
+                .WithMany(x => x.Person1Relations)
+                .HasForeignKey(x => x.PersonId1);
+            
+            modelBuilder.Entity<Relation>()
+                .HasOne(x => x.person2)
+                .WithMany(x => x.Person2Relations)
+                .HasForeignKey(x => x.PersonId2)
+                .OnDelete(DeleteBehavior.NoAction);
+
         }
     }
 }

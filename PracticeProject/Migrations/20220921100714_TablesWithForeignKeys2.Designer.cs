@@ -11,8 +11,8 @@ using PracticeProject.Database;
 namespace PracticeProject.Migrations
 {
     [DbContext(typeof(FamilyDbContext))]
-    [Migration("20220921080639_TablesV1")]
-    partial class TablesV1
+    [Migration("20220921100714_TablesWithForeignKeys2")]
+    partial class TablesWithForeignKeys2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,6 +43,10 @@ namespace PracticeProject.Migrations
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
 
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(40)
@@ -65,13 +69,49 @@ namespace PracticeProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RelationId"), 1L, 1);
 
+                    b.Property<int>("PersonId1")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PersonId2")
+                        .HasColumnType("int");
+
                     b.Property<string>("RelationType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RelationId");
 
+                    b.HasIndex("PersonId1");
+
+                    b.HasIndex("PersonId2");
+
                     b.ToTable("Relations");
+                });
+
+            modelBuilder.Entity("PracticeProject.Models.Relation", b =>
+                {
+                    b.HasOne("PracticeProject.Models.Person", "person1")
+                        .WithMany("Person1Relations")
+                        .HasForeignKey("PersonId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PracticeProject.Models.Person", "person2")
+                        .WithMany("Person2Relations")
+                        .HasForeignKey("PersonId2")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("person1");
+
+                    b.Navigation("person2");
+                });
+
+            modelBuilder.Entity("PracticeProject.Models.Person", b =>
+                {
+                    b.Navigation("Person1Relations");
+
+                    b.Navigation("Person2Relations");
                 });
 #pragma warning restore 612, 618
         }
