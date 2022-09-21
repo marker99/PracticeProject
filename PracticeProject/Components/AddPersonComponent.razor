@@ -1,94 +1,81 @@
 ﻿@page "/addPerson"
 @using PracticeProject.Models
 @using PracticeProject.Resources
+@using PracticeProject.Data
 
-<RadzenTemplateForm Data="@_person" OnInvalidSubmit="@AddNewPerson">
-	<div class="container-fluid">
-		<div class="row">
-			<h3>Person Info</h3>
-			<div class="col-md-6">
-				<RadzenFieldset>
-					<div class="row">
-						<div class="col-md-3 align-items-center d-flex">
-							<RadzenLabel Text="@StringResource.FirstName" />
-						</div>
-						<div class="col-md-8">
-							<RadzenTextBox Style="width: 100%" Name="FirstName" />
-						</div>
-					</div>
+@inject IPersonHandler _personHandler
+@inject NavigationManager _navMgr
 
-					<div class="row">
-						<div class="col-md-3 align-items-center d-flex">
-							<RadzenLabel Text="@StringResource.LastName" />
-						</div>
-						<div class="col-md-8">
-							<RadzenTextBox Style="width: 100%" Name="LastName" />
-						</div>
-					</div>
+<RadzenTemplateForm Data="@newPerson" OnInvalidSubmit="@AddNewPerson">
+    <div class="container-fluid">
+        <div class="row">
+            <h3>Person Info</h3>
+            <div class="col-md-5">
+                <RadzenFieldset>
+                    <div class="row">
+                        <div class="col-md-3 align-items-center d-flex">
+                            <RadzenLabel Text="@StringResource.FirstName" />
+                        </div>
+                        <div class="col-md-8">
+                            <RadzenTextBox Style="width: 100%" @bind-Value="newPerson.FirstName" Name="FirstName" />
+                        </div>
+                    </div>
 
-					<div class="row">
-						<div class="col-md-3 align-items-center d-flex">
-							<RadzenLabel Text="@StringResource.Address" />
-						</div>
-						<div class="col-md-8">
-							<RadzenTextBox Style="width: 100%" Name="Address" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-3 align-items-center d-flex">
-							<RadzenLabel Text="@StringResource.PhoneNumber" />
-						</div>
-						<div class="col-md-8">
-							<RadzenTextBox Style="width: 100%" Name="PhoneNumber" />
-						</div>
-					</div>
+                    <div class="row">
+                        <div class="col-md-3 align-items-center d-flex">
+                            <RadzenLabel Text="@StringResource.LastName" />
+                        </div>
+                        <div class="col-md-8">
+                            <RadzenTextBox Style="width: 100%" @bind-Value="newPerson.LastName" Name="LastName" />
+                        </div>
+                    </div>
 
-					<div class="row">
-						<div class="col-md-3 align-items-center d-flex ">
-							<RadzenLabel Text="@StringResource.Age" />
-						</div>
-						<div class="col-md-3">
-							<RadzenNumeric Style="width: 100%" Name="Age" @bind-Value="_person.Age" />
-						</div>
+                    <div class="row">
+                        <div class="col-md-3 align-items-center d-flex">
+                            <RadzenLabel Text="@StringResource.Address" />
+                        </div>
+                        <div class="col-md-8">
+                            <RadzenTextBox Style="width: 100%" @bind-Value="newPerson.Address" Name="Address" />
+                        </div>
+                    </div>
 
-						<div class="col-md-2 align-items-center d-flex ">
-							<RadzenLabel Text="@StringResource.Gender" />
-						</div>
-						<div class="col-md-3">
-							<RadzenTextBox Style="width: 100%" Name="Gender" />
-						</div>
-					</div>
-				</RadzenFieldset>
+                    <div class="row">
+                        <div class="col-md-3 align-items-center d-flex">
+                            <RadzenLabel Text="@StringResource.PhoneNumber" />
+                        </div>
+                        <div class="col-md-8">
+                            <RadzenTextBox Style="width: 100%" @bind-Value="newPerson.PhoneNumber" Name="PhoneNumber" />
+                        </div>
+                    </div>
 
-			</div>
-			<div class="row ">
-				<div class="col-md-6 d-flex align-items-end justify-content-center" style="margin-top: 16px;">
-					<RadzenButton class="formButton" ButtonType="ButtonType.Submit" Icon="save" Text="Save" />
-					<RadzenButton ButtonStyle="ButtonStyle.Light" Icon="cancel" style="display: inline-block; margin-left: 10px;" Text="Cancel" Click="@Cancel" />
-				</div>
-			</div>
-		</div>
+                    <div class="row">
+                        <div class="col-md-3 align-items-center d-flex ">
+                            <RadzenLabel Text="@StringResource.Age" />
+                        </div>
+                        <div class="col-md-3">
+                            <RadzenNumeric Style="width: 100%" Name="Age" @bind-Value="newPerson.Age" />
+                        </div>
+
+                        <div class="col-md-2 align-items-center d-flex ">
+                            <RadzenLabel Text="@StringResource.Gender" />
+                        </div>
+                        <div class="col-md-3">
+                            <RadzenDropDown @bind-Value="newPerson.Gender" AllowClear="true" Placeholder="Select gender"
+                                            Data="@_genderList" style="width: 100%;" Name="Gender">
+                            </RadzenDropDown>
+                        </div>
+                    </div>
+                </RadzenFieldset>
+
+            </div>
+            <div class="row ">
+                <div class="col-md-6 d-flex align-items-end justify-content-center" style="margin-top: 16px;">
+                    <RadzenButton class="formButton" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Click="@AddNewPerson" />
+                    <RadzenButton ButtonStyle="ButtonStyle.Light" Icon="cancel" style="display: inline-block; margin-left: 10px;" Text="Cancel" Click="@Cancel" />
+                </div>
+            </div>
+        </div>
 
 
-	</div>
+    </div>
 </RadzenTemplateForm>
-
-
-@code {
-	public Person _person;
-
-	protected override async Task OnInitializedAsync()
-	{
-		_person = new();
-	}
-
-	public void AddNewPerson()
-	{
-
-	}
-
-	public void Cancel()
-	{
-		//do something
-	}
-}

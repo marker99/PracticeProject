@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using PracticeProject.Data;
+using PracticeProject.Data.Implementations;
+using PracticeProject.Database;
+using PracticeProject.Repositories;
+using PracticeProject.Repositories.Implementations;
 using Radzen;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +13,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<DialogService>();
+
+builder.Services.AddDbContext<FamilyDbContext>();
+builder.Services.AddScoped<IPersonHandler, PersonHandler>();
+builder.Services.AddScoped<IRelationHandler, RelationHandler>();
+builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+builder.Services.AddScoped<IRelationRepository, RelationRepository>();
 
 var app = builder.Build();
 

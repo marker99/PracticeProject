@@ -2,18 +2,18 @@
 @using PracticeProject.Models
 @using PracticeProject.Resources
 
-<RadzenTemplateForm Data="@_person" OnInvalidSubmit="@AddNewRelation">
+<RadzenTemplateForm Data="@person" OnInvalidSubmit="@AddNewRelation">
 	<div class="container-fluid">
 		<div class="row">
 			<h3>Person Info</h3>
-			<div class="col-md-6">
+			<div class="col-md-5">
 				<RadzenFieldset>
 					<div class="row">
 						<div class="col-md-3 align-items-center d-flex">
 							<RadzenLabel Text="@StringResource.Person" />
 						</div>
 						<div class="col-md-8">
-							<RadzenDropDown @bind-Value="_person.FirstName" AllowClear="true" Placeholder="Select person"
+							<RadzenDropDown @bind-Value="person.FirstName" AllowClear="true" Placeholder="Select person"
 											Data="@people" style="width: 100%;" TextProperty="FirstName" ValueProperty="PersonId" Name="PersonId">
 							</RadzenDropDown>
 						</div>
@@ -35,7 +35,7 @@
 							<RadzenLabel Text="@StringResource.Person" />
 						</div>
 						<div class="col-md-8">
-							<RadzenDropDown @bind-Value="_person.FirstName" AllowClear="true" Placeholder="Select person"
+							<RadzenDropDown @bind-Value="person.FirstName" AllowClear="true" Placeholder="Select person"
 											Data="@people" style="width: 100%;" TextProperty="FirstName" ValueProperty="PersonId" Name="PersonId">
 							</RadzenDropDown>
 						</div>
@@ -55,28 +55,4 @@
 	</div>
 </RadzenTemplateForm>
 
-
-@code {
-	public Person _person;
-
-	public IEnumerable<Person> people;
-
-	public Relation _relation;
-
-	protected override async Task OnInitializedAsync()
-	{
-		_person = new();
-		_relation = new();
-	}
-
-	public void AddNewRelation()
-	{
-
-	}
-
-	public void Cancel()
-	{
-		//do something
-	}
-}
 
