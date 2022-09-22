@@ -10,3 +10,10 @@ Har en øve-opgave, så ikke en opgave vi reelt kommer til er bruge i produktet,
 3. Lav en ny side hvor man kan se/oprette/redigere/slette data fra begge tabeller
 
 4. Lav det så fancy du kan
+
+
+Todo:
+
+Add relations between people
+Delete people and/or relations
+Edit people and/or relations

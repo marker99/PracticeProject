@@ -56,7 +56,7 @@ namespace PracticeProject.Migrations
 
                     b.HasKey("PersonId");
 
-                    b.ToTable("Persons");
+                    b.ToTable("Persons", (string)null);
                 });
 
             modelBuilder.Entity("PracticeProject.Models.Relation", b =>
@@ -83,7 +83,7 @@ namespace PracticeProject.Migrations
 
                     b.HasIndex("PersonId2");
 
-                    b.ToTable("Relations");
+                    b.ToTable("Relations", (string)null);
                 });
 
             modelBuilder.Entity("PracticeProject.Models.Relation", b =>

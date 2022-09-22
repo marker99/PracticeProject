@@ -7,6 +7,8 @@
 @inject NavigationManager _navMgr
 
 <RadzenTemplateForm Data="@newPerson" OnInvalidSubmit="@AddNewPerson">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
     <div class="container-fluid">
         <div class="row">
             <h3>Person Info</h3>
@@ -45,6 +47,7 @@
                         </div>
                         <div class="col-md-8">
                             <RadzenTextBox Style="width: 100%" @bind-Value="newPerson.PhoneNumber" Name="PhoneNumber" />
+                            @*<RadzenMask Mask="** ** ** **" CharacterPattern="[0-9]" Placeholder="00 00 00 00" Name="PhoneNumber" @bind-Value=@newPerson.PhoneNumber Style="width: 100%;" />*@
                         </div>
                     </div>
 
@@ -56,10 +59,10 @@
                             <RadzenNumeric Style="width: 100%" Name="Age" @bind-Value="newPerson.Age" />
                         </div>
 
-                        <div class="col-md-2 align-items-center d-flex ">
+                        <div class="col-md-1 align-items-center d-flex ">
                             <RadzenLabel Text="@StringResource.Gender" />
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <RadzenDropDown @bind-Value="newPerson.Gender" AllowClear="true" Placeholder="Select gender"
                                             Data="@_genderList" style="width: 100%;" Name="Gender">
                             </RadzenDropDown>

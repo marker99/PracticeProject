@@ -4,22 +4,23 @@ namespace PracticeProject.Components
 {
     public partial class RelationComponent
     {
-        public Person person;
+        //private Person _person;
+        private IList<Person> _persons;
 
 
-        public IEnumerable<Person> people;
-
-        public Relation newRelation;
+        private Relation _newRelation;
 
         protected override async Task OnInitializedAsync()
         {
-            person = new();
-            newRelation = new();
+            _persons = await _personHandler.GetAllPersons();
+            //_person = new();
+            _newRelation = new();
+            
         }
 
         public void AddNewRelation()
         {
-
+            _relationHandler.AddNewRelationBetweenPeople(_newRelation);
         }
 
         public void Cancel()

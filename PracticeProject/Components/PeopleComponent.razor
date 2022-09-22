@@ -7,31 +7,43 @@
 
 @if (_persons == null)
 {
-    <p><em>Loading...</em></p>
+	<p><em>Loading...</em></p>
 }
 else if (!_persons.Any())
 {
-    <p>
-        <em>No people exists. Please add some.</em>
-    </p>
+	<p>
+		<em>No people exists. Please add some.</em>
+	</p>
 }
 else
 {
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-8">
-                <RadzenDataGrid AllowFiltering="true" AllowPaging="true" PageSize="6" AllowSorting="true" Data="@_persons" TItem="Person"
-                            FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowColumnResize="true" ShowPagingSummary="@showPageSummary" PagingSummaryFormat="@pagingSummaryFormat">
-                    <Columns>
-                        <RadzenDataGridColumn TItem="Person" Property="FirstName" Title="@StringResource.FirstName" />
-                        <RadzenDataGridColumn TItem="Person" Property="LastName" Title="@StringResource.LastName" />
-                        <RadzenDataGridColumn TItem="Person" Property="Age" Title="@StringResource.Age" />
-                        <RadzenDataGridColumn TItem="Person" Property="Gender" Title="@StringResource.Gender" />
-                        <RadzenDataGridColumn TItem="Person" Property="Address" Title="@StringResource.Address" />
-                        <RadzenDataGridColumn TItem="Person" Property="PhoneNumber" Title="@StringResource.PhoneNumber" />
-                    </Columns>
-                </RadzenDataGrid>
-            </div>
-        </div>
-    </div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-8">
+				<RadzenDataGrid AllowFiltering="true" AllowPaging="true" PageSize="8" AllowSorting="true" Data="@_persons" TItem="Person"
+							FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowColumnResize="true"
+							ShowPagingSummary="@showPageSummary" PagingSummaryFormat="@pagingSummaryFormat">
+					<Template Context="person">
+						<RadzenDataGrid AllowFiltering="true" AllowPaging="true" AllowSorting="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+									AllowColumnResize="true" Data="@person.Person1Relations" TItem="Relation">
+							<Columns>
+								<RadzenDataGridColumn TItem="Relation" Property="RelationType" Title="Relation type" />
+							</Columns>
+						</RadzenDataGrid>
+					</Template>
+					<Columns>
+						<RadzenDataGridColumn TItem="Person" Property="FirstName" Title="@StringResource.FirstName" />
+						<RadzenDataGridColumn TItem="Person" Property="LastName" Title="@StringResource.LastName" />
+						<RadzenDataGridColumn TItem="Person" Property="Age" Title="@StringResource.Age" />
+						<RadzenDataGridColumn TItem="Person" Property="Gender" Title="@StringResource.Gender" />
+						<RadzenDataGridColumn TItem="Person" Property="Address" Title="@StringResource.Address" />
+						<RadzenDataGridColumn TItem="Person" Property="PhoneNumber" Title="@StringResource.PhoneNumber" />
+					</Columns>
+				</RadzenDataGrid>
+			</div>
+		</div>
+
+
+
+	</div>
 }

@@ -1,8 +1,12 @@
 ﻿@page "/relation"
+@using PracticeProject.Data
 @using PracticeProject.Models
 @using PracticeProject.Resources
 
-<RadzenTemplateForm Data="@person" OnInvalidSubmit="@AddNewRelation">
+@inject IPersonHandler _personHandler
+@inject IRelationHandler _relationHandler
+
+<RadzenTemplateForm Data="@_newRelation" OnInvalidSubmit="@AddNewRelation">
 	<div class="container-fluid">
 		<div class="row">
 			<h3>Person Info</h3>
@@ -13,9 +17,14 @@
 							<RadzenLabel Text="@StringResource.Person" />
 						</div>
 						<div class="col-md-8">
-							<RadzenDropDown @bind-Value="person.FirstName" AllowClear="true" Placeholder="Select person"
-											Data="@people" style="width: 100%;" TextProperty="FirstName" ValueProperty="PersonId" Name="PersonId">
-							</RadzenDropDown>
+							<RadzenDropDownDataGrid TValue="Person" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterOperator="StringFilterOperator.Contains"
+													AllowFiltering="true" AllowClear="true" PageSize="10" Placeholder="Select"
+													Data="@_persons" TextProperty="FirstName" ValueProperty="PersonId1" Style="width:100%">
+								<Columns>
+									<RadzenDropDownDataGridColumn Property="FirstName" Title="@StringResource.FirstName" />
+									<RadzenDropDownDataGridColumn Property="LastName" Title="@StringResource.LastName" />
+								</Columns>
+							</RadzenDropDownDataGrid>
 						</div>
 					</div>
 
@@ -35,9 +44,14 @@
 							<RadzenLabel Text="@StringResource.Person" />
 						</div>
 						<div class="col-md-8">
-							<RadzenDropDown @bind-Value="person.FirstName" AllowClear="true" Placeholder="Select person"
-											Data="@people" style="width: 100%;" TextProperty="FirstName" ValueProperty="PersonId" Name="PersonId">
-							</RadzenDropDown>
+							<RadzenDropDownDataGrid TValue="Person" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterOperator="StringFilterOperator.Contains"
+													AllowFiltering="true" AllowClear="true" PageSize="10" Placeholder="Select"
+													Data="@_persons" TextProperty="FirstName" ValueProperty="PersonId2" Style="width:100%">
+								<Columns>
+									<RadzenDropDownDataGridColumn Property="FirstName" Title="@StringResource.FirstName" />
+									<RadzenDropDownDataGridColumn Property="LastName" Title="@StringResource.LastName" />
+								</Columns>
+							</RadzenDropDownDataGrid>
 						</div>
 					</div>
 				</RadzenFieldset>
