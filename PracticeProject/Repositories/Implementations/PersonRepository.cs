@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using PracticeProject.Database;
 using PracticeProject.Models;
 
@@ -26,7 +27,25 @@ namespace PracticeProject.Repositories.Implementations
             return await _dbContext.Persons.ToListAsync();
         }
 
-        //Just used for adding some dummy data
+        public async Task RemovePersonAsync(int id)
+        {
+            Person personToDelete = _dbContext.Persons.FirstOrDefault(x => x.PersonId == id);
+            if (personToDelete != null)
+            {
+                _dbContext.Persons.Remove(personToDelete);
+                await _dbContext.SaveChangesAsync();
+            }
+        }
+        public async Task<Person> UpdatePersonAsync(Person person)
+        {
+            EntityEntry<Person> entity = _dbContext.Persons.Update(person);
+            await _dbContext.SaveChangesAsync();
+
+            return entity.Entity;
+        }
+
+
+        //Ignore this. Just used for adding some dummy data
         public void CreatePeopleAndPopulateDb()
         {
             var existingPeople = _dbContext.Persons.Select(x => x);
@@ -98,6 +117,7 @@ namespace PracticeProject.Repositories.Implementations
 
             _dbContext.SaveChangesAsync();
         }
+
 
     }
 }

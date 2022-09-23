@@ -4,15 +4,16 @@
 <PageTitle>Family</PageTitle>
 
 <select @onchange="OnChange">
-    <option value="@nameof(AddPersonComponent)">
-        @nameof(AddPersonComponent)
-    </option>
-    <option value="@nameof(RelationComponent)">
-        @nameof(RelationComponent)
-    </option>
-    <option value="@nameof(PeopleComponent)">
-        @nameof(PeopleComponent)
-    </option>
+	<option value="@nameof(PeopleComponent)">
+		@nameof(PeopleComponent)
+	</option>
+	<option value="@nameof(AddPersonComponent)">
+		@nameof(AddPersonComponent)
+	</option>
+	<option value="@nameof(RelationComponent)">
+		@nameof(RelationComponent)
+	</option>
+
 </select>
 
 <br />
@@ -21,12 +22,12 @@
 <DynamicComponent Type="selectedType" />
 
 @code {
-    
-    Type selectedType = typeof(AddPersonComponent);
 
-    public void OnChange(ChangeEventArgs changeEventArgs)
-    {
-        selectedType = Type.GetType($"PracticeProject.Components.{changeEventArgs.Value}");
-    }
+	Type selectedType = typeof(PeopleComponent);
+
+	public void OnChange(ChangeEventArgs changeEventArgs)
+	{
+		selectedType = Type.GetType($"PracticeProject.Components.{changeEventArgs.Value}");
+	}
 
 }

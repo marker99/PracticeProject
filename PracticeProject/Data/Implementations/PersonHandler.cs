@@ -21,5 +21,15 @@ namespace PracticeProject.Data.Implementations
         {
             return await _personRepository.GetAllPersonsAsync();
         }
+
+        public async Task RemovePerson(int id)
+        {
+            await _personRepository.RemovePersonAsync(id);
+        }
+
+        public async Task<Person> UpdatePerson(Person person)
+        {
+            return await _personRepository.UpdatePersonAsync(person);
+        }
     }
 }

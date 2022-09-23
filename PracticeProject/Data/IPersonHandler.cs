@@ -1,4 +1,5 @@
-﻿using PracticeProject.Models;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using PracticeProject.Models;
 
 namespace PracticeProject.Data
 {
@@ -7,6 +8,10 @@ namespace PracticeProject.Data
         public Task<Person> AddNewPerson(Person person);
 
         public Task<IList<Person>> GetAllPersons();
+
+        public Task RemovePerson(int id);
+
+        public Task<Person> UpdatePerson(Person person);
 
     }
 }

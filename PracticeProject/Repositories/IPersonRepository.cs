@@ -8,7 +8,12 @@ namespace PracticeProject.Repositories
 
         public Task<IList<Person>> GetAllPersonsAsync();
 
-        //Just used for adding some dummy data
+        public Task RemovePersonAsync(int id);
+
+        public Task<Person> UpdatePersonAsync(Person person);
+
+
+        //Ignore this. Just used for adding some dummy data
         void CreatePeopleAndPopulateDb();
 
     }

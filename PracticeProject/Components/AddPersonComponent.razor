@@ -46,8 +46,8 @@
                             <RadzenLabel Text="@StringResource.PhoneNumber" />
                         </div>
                         <div class="col-md-8">
-                            <RadzenTextBox Style="width: 100%" @bind-Value="newPerson.PhoneNumber" Name="PhoneNumber" />
-                            @*<RadzenMask Mask="** ** ** **" CharacterPattern="[0-9]" Placeholder="00 00 00 00" Name="PhoneNumber" @bind-Value=@newPerson.PhoneNumber Style="width: 100%;" />*@
+                            @*<RadzenTextBox Style="width: 100%" @bind-Value="newPerson.PhoneNumber" Name="PhoneNumber" />*@
+                            <RadzenMask Mask="********" CharacterPattern="[0-9]" Name="PhoneNumber" @bind-Value=@newPerson.PhoneNumber Style="width: 100%" />
                         </div>
                     </div>
 

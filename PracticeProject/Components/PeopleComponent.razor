@@ -4,46 +4,79 @@
 @using PracticeProject.Resources
 
 @inject IPersonHandler _personHandler
+@inject NavigationManager _navMgr
 
-@if (_persons == null)
-{
-	<p><em>Loading...</em></p>
-}
-else if (!_persons.Any())
-{
-	<p>
-		<em>No people exists. Please add some.</em>
-	</p>
-}
-else
-{
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-8">
-				<RadzenDataGrid AllowFiltering="true" AllowPaging="true" PageSize="8" AllowSorting="true" Data="@_persons" TItem="Person"
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md">
+			<RadzenDataGrid AllowFiltering="true" AllowPaging="true" PageSize="8" AllowSorting="true" Data="@_persons" LoadData="@LoadPersonData" TItem="Person"
 							FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowColumnResize="true"
-							ShowPagingSummary="@showPageSummary" PagingSummaryFormat="@pagingSummaryFormat">
-					<Template Context="person">
-						<RadzenDataGrid AllowFiltering="true" AllowPaging="true" AllowSorting="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-									AllowColumnResize="true" Data="@person.Person1Relations" TItem="Relation">
-							<Columns>
-								<RadzenDataGridColumn TItem="Relation" Property="RelationType" Title="Relation type" />
-							</Columns>
-						</RadzenDataGrid>
-					</Template>
-					<Columns>
-						<RadzenDataGridColumn TItem="Person" Property="FirstName" Title="@StringResource.FirstName" />
-						<RadzenDataGridColumn TItem="Person" Property="LastName" Title="@StringResource.LastName" />
-						<RadzenDataGridColumn TItem="Person" Property="Age" Title="@StringResource.Age" />
-						<RadzenDataGridColumn TItem="Person" Property="Gender" Title="@StringResource.Gender" />
-						<RadzenDataGridColumn TItem="Person" Property="Address" Title="@StringResource.Address" />
-						<RadzenDataGridColumn TItem="Person" Property="PhoneNumber" Title="@StringResource.PhoneNumber" />
-					</Columns>
-				</RadzenDataGrid>
-			</div>
+							ShowPagingSummary="@showPageSummary" PagingSummaryFormat="@pagingSummaryFormat" RowUpdate="@UpdatePerson"
+							Count="@count" IsLoading=@isPersonsLoading EditMode="DataGridEditMode.Single" @ref="_dataGrid">
+				<Columns>
+					<RadzenDataGridColumn TItem="Person" Property="FirstName" Title="@StringResource.FirstName">
+						<EditTemplate Context="person">
+							<RadzenTextBox Style="width: 100%" @bind-Value="person.FirstName" Name="FirstName" />
+						</EditTemplate>
+					</RadzenDataGridColumn>
+
+					<RadzenDataGridColumn TItem="Person" Property="LastName" Title="@StringResource.LastName">
+						<EditTemplate Context="person">
+							<RadzenTextBox Style="width: 100%" @bind-Value="person.LastName" Name="LastName" />
+						</EditTemplate>
+					</RadzenDataGridColumn>
+
+					<RadzenDataGridColumn TItem="Person" Property="Age" Title="@StringResource.Age">
+						<EditTemplate Context="person">
+							<RadzenNumeric Style="width: 100%" Name="Age" @bind-Value="person.Age" />
+						</EditTemplate>
+					</RadzenDataGridColumn>
+
+					<RadzenDataGridColumn TItem="Person" Property="Gender" Title="@StringResource.Gender">
+						<EditTemplate Context="person">
+							<RadzenDropDown @bind-Value="person.Gender" AllowClear="true" Placeholder="Select gender"
+											Data="@_genderList" style="width: 100%;" Name="Gender" />
+						</EditTemplate>
+					</RadzenDataGridColumn>
+
+					<RadzenDataGridColumn TItem="Person" Property="Address" Title="@StringResource.Address">
+						<EditTemplate Context="person">
+							<RadzenTextBox Style="width: 100%" @bind-Value="person.Address" Name="Address" />
+						</EditTemplate>
+					</RadzenDataGridColumn>
+
+					<RadzenDataGridColumn TItem="Person" Property="PhoneNumber" Title="@StringResource.PhoneNumber">
+						<EditTemplate Context="person">
+                            <RadzenMask Mask="********" CharacterPattern="[0-9]" Name="PhoneNumber" @bind-Value=@person.PhoneNumber Style="width: 100%" />
+						</EditTemplate>
+					</RadzenDataGridColumn>
+
+					<RadzenDataGridColumn TItem="Person" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="100px">
+						<Template Context="person">
+							<RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Light"  Click="@(args => EditPerson(person))" @onclick:stopPropagation="true">
+							</RadzenButton>
+						</Template>
+						<EditTemplate Context="person">
+							<RadzenButton Icon="check" ButtonStyle="ButtonStyle.Primary" Class="formButton" Click="@((args) => SaveRow(person))">
+							</RadzenButton>
+							<RadzenButton Icon="close" ButtonStyle="ButtonStyle.Light"  Click="@((args) => CancelEdit(person))">
+							</RadzenButton>
+						</EditTemplate>
+					</RadzenDataGridColumn>
+
+					<RadzenDataGridColumn TItem="Person" Context="person" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
+						<Template Context="person">
+							<RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Small"  Click="@(args => DeletePerson(person.PersonId))" @onclick:stopPropagation="true">
+							</RadzenButton>
+						</Template>
+						<EditTemplate Context="person">
+							<RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Small"  Click="@(args => DeletePerson(person.PersonId))">
+							</RadzenButton>
+						</EditTemplate>
+					</RadzenDataGridColumn>
+				</Columns>
+			</RadzenDataGrid>
 		</div>
-
-
-
 	</div>
-}
+</div>
