@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using MudBlazor.Services;
 using PracticeProject.Data;
 using PracticeProject.Data.Implementations;
 using PracticeProject.Database;
@@ -13,8 +14,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<DialogService>();
+builder.Services.AddMudServices();
 
-builder.Services.AddDbContext<FamilyDbContext>();
+builder.Services.AddDbContext<FamilyDbContext>(ServiceLifetime.Transient);
 builder.Services.AddScoped<IPersonHandler, PersonHandler>();
 builder.Services.AddScoped<IRelationHandler, RelationHandler>();
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();

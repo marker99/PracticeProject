@@ -10,8 +10,8 @@
 	<option value="@nameof(AddPersonComponent)">
 		@nameof(AddPersonComponent)
 	</option>
-	<option value="@nameof(RelationComponent)">
-		@nameof(RelationComponent)
+	<option value="@nameof(AddRelationComponent)">
+		@nameof(AddRelationComponent)
 	</option>
 
 </select>
@@ -19,15 +19,17 @@
 <br />
 <br />
 
-<DynamicComponent Type="selectedType" />
+<DynamicComponent Type="_selectedType" />
 
 @code {
 
-	Type selectedType = typeof(PeopleComponent);
+	Type? _selectedType = typeof(PeopleComponent);
 
-	public void OnChange(ChangeEventArgs changeEventArgs)
+    private readonly string _namespaceComponents = "PracticeProject.Components.";
+
+	public void OnChange(ChangeEventArgs e)
 	{
-		selectedType = Type.GetType($"PracticeProject.Components.{changeEventArgs.Value}");
+		_selectedType = Type.GetType($"{_namespaceComponents}{e.Value}");
 	}
 
 }

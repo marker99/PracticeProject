@@ -6,5 +6,9 @@ namespace PracticeProject.Data
     {
         public Task<Relation> AddNewRelationBetweenPeople(Relation relation);
 
+        public Task<IList<Relation>> GetAllRelations();
+
+        public Task RemoveRelation(int id);
+
     }
 }

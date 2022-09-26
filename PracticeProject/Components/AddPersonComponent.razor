@@ -3,9 +3,6 @@
 @using PracticeProject.Resources
 @using PracticeProject.Data
 
-@inject IPersonHandler _personHandler
-@inject NavigationManager _navMgr
-
 <RadzenTemplateForm Data="@newPerson" OnInvalidSubmit="@AddNewPerson">
     <DataAnnotationsValidator />
     <ValidationSummary />

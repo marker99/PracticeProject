@@ -6,5 +6,9 @@ namespace PracticeProject.Repositories
     {
         public Task<Relation> AddNewRelationBetweenPeopleAsync(Relation relation);
 
+        public Task<IList<Relation>> GetAllRelationsAsync();
+
+        public Task RemoveRelationAsync(int id);
+
     }
 }

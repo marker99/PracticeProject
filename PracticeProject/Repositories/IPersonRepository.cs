@@ -8,6 +8,8 @@ namespace PracticeProject.Repositories
 
         public Task<IList<Person>> GetAllPersonsAsync();
 
+        public Task<Person> GetPersonByIdAsync(int personId);
+
         public Task RemovePersonAsync(int id);
 
         public Task<Person> UpdatePersonAsync(Person person);

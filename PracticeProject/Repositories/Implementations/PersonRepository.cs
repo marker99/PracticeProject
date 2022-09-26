@@ -27,15 +27,21 @@ namespace PracticeProject.Repositories.Implementations
             return await _dbContext.Persons.ToListAsync();
         }
 
+        public async Task<Person> GetPersonByIdAsync(int personId)
+        {
+            return (await _dbContext.Persons.FirstOrDefaultAsync(p => p.PersonId == personId))!;
+        }
+
         public async Task RemovePersonAsync(int id)
         {
-            Person personToDelete = _dbContext.Persons.FirstOrDefault(x => x.PersonId == id);
+            Person personToDelete = await _dbContext.Persons.FirstOrDefaultAsync(x => x.PersonId == id);
             if (personToDelete != null)
             {
                 _dbContext.Persons.Remove(personToDelete);
                 await _dbContext.SaveChangesAsync();
             }
         }
+
         public async Task<Person> UpdatePersonAsync(Person person)
         {
             EntityEntry<Person> entity = _dbContext.Persons.Update(person);
@@ -48,6 +54,9 @@ namespace PracticeProject.Repositories.Implementations
         //Ignore this. Just used for adding some dummy data
         public void CreatePeopleAndPopulateDb()
         {
+            var existingRelations = _dbContext.Relations.Select(x => x);
+            _dbContext.Relations.RemoveRange(existingRelations);
+
             var existingPeople = _dbContext.Persons.Select(x => x);
             _dbContext.Persons.RemoveRange(existingPeople);
 
@@ -106,7 +115,35 @@ namespace PracticeProject.Repositories.Implementations
                     Gender = "Female",
                     Address = "Nordrevej 10",
                     PhoneNumber = "66128823"
+                },
+                new Person
+                {
+                    FirstName = "Kirsten",
+                    LastName = "Madsen",
+                    Age = 22,
+                    Gender = "Female",
+                    Address = "Nordlystvej 11",
+                    PhoneNumber = "11667397"
+                },
+                new Person
+                {
+                    FirstName = "Peter",
+                    LastName = "Kjaergaard",
+                    Age = 24,
+                    Gender = "Male",
+                    Address = "Østergade 18",
+                    PhoneNumber = "94258612"
+                },
+                new Person
+                {
+                    FirstName = "Jonas",
+                    LastName = "Gammelby",
+                    Age = 24,
+                    Gender = "Male",
+                    Address = "Fasanvej 8",
+                    PhoneNumber = "23751277"
                 }
+
 
             };
 

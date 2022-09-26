@@ -1,9 +1,21 @@
-﻿using PracticeProject.Models;
+﻿using Microsoft.AspNetCore.Components;
+using PracticeProject.Data;
+using PracticeProject.Models;
 
 namespace PracticeProject.Components
 {
     public partial class AddPersonComponent
     {
+        #region Injections
+
+        [Inject]
+        private IPersonHandler _personHandler { get; set; }
+        [Inject]
+        private NavigationManager _navigationManager { get; set; }
+
+        #endregion
+
+
         public Person newPerson;
 
         private IList<string> _genderList = new List<string>() { "Male", "Female", "Other" };
@@ -17,12 +29,20 @@ namespace PracticeProject.Components
         public void AddNewPerson()
         {
             _personHandler.AddNewPerson(newPerson);
-            //_navMgr.NavigateTo("/people");
+            _navigationManager.NavigateTo("/people");
         }
 
         public void Cancel()
         {
-            //do something
+            newPerson = new Person
+            {
+                FirstName = "",
+                LastName = "",
+                Age = 0,
+                Gender = "",
+                Address = "",
+                PhoneNumber = ""
+            };
         }
 	}
 }
