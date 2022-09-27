@@ -2,6 +2,7 @@
 @using PracticeProject.Data
 @using PracticeProject.Models
 @using PracticeProject.Resources
+@using ButtonType = Radzen.ButtonType
 
 <EditForm Model="@_newRelation" OnValidSubmit="@AddNewRelation">
     <DataAnnotationsValidator />
@@ -62,7 +63,7 @@
         
         <div class="row ">
         <div class="col-md-6 d-flex align-items-end " style="margin-top: 16px;">
-            <RadzenButton class="formButton" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Click="@AddNewRelation" />
+            <RadzenButton class="butto_green_colour" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Click="@AddNewRelation" />
             <RadzenButton ButtonStyle="ButtonStyle.Light" Icon="cancel" style="display: inline-block; margin-left: 10px;" Text="Cancel" Click="@Cancel" />
         </div>
     </div>
@@ -70,7 +71,7 @@
     </div>
 
     @*<p class="actions">
-    <button class="btn btn-outline-dark btn-primary" type="submit">Save Changes</button>
+    <butto_green_colour class="btn btn-outline-dark btn-primary" type="submit">Save Changes</butto_green_colour>
     </p>*@
 
     

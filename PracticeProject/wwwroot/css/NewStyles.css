@@ -2,6 +2,26 @@
     margin-bottom: 16px;
 }
 
-.formButton {
-    background-color: #005cbf !important;
+.butto_green_colour {
+    background-color: #0d7d87 !important;
+}
+
+.rz-spinner-button {
+    background-color: #0d7d87 !important;
+}
+
+.rz-primary {
+    background-color: #0d7d87 !important
+}
+
+.rz-secondary {
+    background-color: #6a9559 !important
+}
+
+.rz-datatable-thead th, .rz-grid-table thead th {
+    background-color: #98c8cf !important
+}
+
+.indent {
+    text-indent: 1em;
 }
