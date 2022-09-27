@@ -22,10 +22,19 @@ namespace PracticeProject.Data.Implementations
             return await _relationRepository.GetAllRelationsAsync();
         }
 
+        public async Task<Relation> GetRelationById(int relationId)
+        {
+            return await _relationRepository.GetRelationByIdAsync(relationId);
+        }
+
         public async Task RemoveRelation(int id)
         {
             await _relationRepository.RemoveRelationAsync(id);
         }
 
+        public async Task<Relation> UpdateRelation(Relation relation)
+        {
+            return await _relationRepository.UpdateRelationAsync(relation);
+        }
     }
 }

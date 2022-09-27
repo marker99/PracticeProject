@@ -10,5 +10,9 @@ namespace PracticeProject.Repositories
 
         public Task RemoveRelationAsync(int id);
 
+        public Task<Relation> UpdateRelationAsync(Relation relation);
+
+        public Task<Relation> GetRelationByIdAsync(int relationId);
+
     }
 }

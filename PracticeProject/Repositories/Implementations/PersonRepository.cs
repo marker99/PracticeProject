@@ -29,7 +29,7 @@ namespace PracticeProject.Repositories.Implementations
 
         public async Task<Person> GetPersonByIdAsync(int personId)
         {
-            return (await _dbContext.Persons.FirstOrDefaultAsync(p => p.PersonId == personId))!;
+            return await _dbContext.Persons.FirstOrDefaultAsync(p => p.PersonId == personId);
         }
 
         public async Task RemovePersonAsync(int id)

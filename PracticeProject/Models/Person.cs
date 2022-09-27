@@ -17,7 +17,7 @@ namespace PracticeProject.Models
         public string LastName { get; set; }
 
         [RegularExpression(@"\d+", ErrorMessage = "Invalid value")]
-        [Required, Range(1,122, ErrorMessage = "Please enter an age between 1 - 122")]
+        [Required, Range(1, 122, ErrorMessage = "Please enter an age between 1 - 122")]
         public int Age { get; set; }
 
         public string Gender { get; set; }
@@ -28,6 +28,17 @@ namespace PracticeProject.Models
 
         public List<Relation> Person1Relations { get; set; }
         public List<Relation> Person2Relations { get; set; }
+
+        public override string ToString()
+        {
+            return $"Id: {PersonId}" +
+                   $"\tFirst Name: {FirstName}" +
+                   $"\tLast Name: {LastName}" +
+                   $"\tAge: {Age}" +
+                   $"\tGender: {Gender}" +
+                   $"\tAddress: {Address}" +
+                   $"\tPhoneNumber: {PhoneNumber}";
+        }
 
     }
 }

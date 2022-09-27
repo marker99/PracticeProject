@@ -1,28 +1,35 @@
 ﻿@using PracticeProject.Models
 
 <RadzenDataGrid AllowFiltering="true" AllowPaging="true" PageSize="8" AllowSorting="true" Data="@_relations" LoadData="@LoadRelationData" TItem="Relation"
-                FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowColumnResize="true"
-                ShowPagingSummary="@showPageSummary" PagingSummaryFormat="@pagingSummaryFormat" 
-                Count="@_relationsCount" IsLoading="@_isRelationsLoading" EditMode="DataGridEditMode.Single" @ref="_relationDataGrid">
-    <Columns>
-        <RadzenDataGridColumn TItem="Relation" Property="PersonId1" Title="Person Id 1">
-        </RadzenDataGridColumn>
+				FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowColumnResize="true"
+				ShowPagingSummary="@showPageSummary" PagingSummaryFormat="@pagingSummaryFormat"
+				Count="@_relationsCount" IsLoading="@_isRelationsLoading" EditMode="DataGridEditMode.Single" @ref="_relationDataGrid">
+	<Columns>
+		<RadzenDataGridColumn TItem="Relation" Property="Person.FirstName" Title="Name">
+		</RadzenDataGridColumn>
 
-        <RadzenDataGridColumn TItem="Relation" Property="RelationType" Title="Relation Type">
-        </RadzenDataGridColumn>
+		<RadzenDataGridColumn TItem="Relation" Property="RelationType" Title="Relation Type">
+		</RadzenDataGridColumn>
 
-        <RadzenDataGridColumn TItem="Relation" Property="PersonId2" Title="Person Id 2">
-        </RadzenDataGridColumn>
-                    
-        <RadzenDataGridColumn TItem="Relation" Context="relation" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
-            <Template Context="relation">
-                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Small" Click="@(args => DeleteRelation(relation.RelationId))" @onclick:stopPropagation="true">
-                </RadzenButton>
-            </Template>
-            <EditTemplate Context="relation">
-                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Small" Click="@(args => DeleteRelation(relation.RelationId))">
-                </RadzenButton>
-            </EditTemplate>
-        </RadzenDataGridColumn>
-    </Columns>
+		<RadzenDataGridColumn TItem="Relation" Property="PersonId2" Title="Person Id 2">
+		</RadzenDataGridColumn>
+
+		<RadzenDataGridColumn TItem="Relation" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="100px">
+			<Template Context="data">
+				<RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Light" Click="@(args => EditRelation(data.RelationId))" @onclick:stopPropagation="true">
+				</RadzenButton>
+			</Template>
+		</RadzenDataGridColumn>
+
+		<RadzenDataGridColumn TItem="Relation" Context="relation" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
+			<Template Context="relation">
+				<RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Small" Click="@(args => DeleteRelation(relation.RelationId))" @onclick:stopPropagation="true">
+				</RadzenButton>
+			</Template>
+			<EditTemplate Context="relation">
+				<RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Small" Click="@(args => DeleteRelation(relation.RelationId))">
+				</RadzenButton>
+			</EditTemplate>
+		</RadzenDataGridColumn>
+	</Columns>
 </RadzenDataGrid>

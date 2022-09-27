@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using PracticeProject.Database;
 using PracticeProject.Models;
 
@@ -26,6 +27,11 @@ namespace PracticeProject.Repositories.Implementations
             return await _dbContext.Relations.ToListAsync();
         }
 
+        public async Task<Relation> GetRelationByIdAsync(int relationId)
+        {
+            return await _dbContext.Relations.FirstOrDefaultAsync(r => r.RelationId == relationId);
+        }
+
         public async Task RemoveRelationAsync(int id)
         {
             Relation relationToDelete = await _dbContext.Relations.FirstOrDefaultAsync(x => x.RelationId == id);
@@ -34,6 +40,14 @@ namespace PracticeProject.Repositories.Implementations
                 _dbContext.Relations.Remove(relationToDelete);
                 await _dbContext.SaveChangesAsync();
             }
+        }
+
+        public async Task<Relation> UpdateRelationAsync(Relation relation)
+        {
+            EntityEntry<Relation> entity = _dbContext.Update(relation);
+            await _dbContext.SaveChangesAsync();
+
+            return entity.Entity;
         }
     }
 }

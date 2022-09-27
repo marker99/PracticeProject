@@ -10,5 +10,8 @@ namespace PracticeProject.Data
 
         public Task RemoveRelation(int id);
 
+        public Task<Relation> UpdateRelation(Relation relation);
+
+        public Task<Relation> GetRelationById(int relationId);
     }
 }

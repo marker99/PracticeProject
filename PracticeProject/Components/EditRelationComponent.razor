@@ -1,0 +1,116 @@
+﻿@page "/editRelationComponent/{Id:int}"
+
+@using PracticeProject.Data
+@using PracticeProject.Models
+
+<EditForm Model="@_relation" OnValidSubmit="@UpdateRelation">
+	<DataAnnotationsValidator />
+	<ValidationSummary />
+
+	<h5>Personal Information</h5>
+	<div class="form-group">
+		<table class="border-bottom border-top border-dark m-2">
+			<tr>
+				<td class="p-1">Person 1 Id</td>
+				<td class="p-1">
+					@*<InputNumber @bind-Value="_newRelation.PersonId1" />*@
+
+
+					@*<InputSelect class="form-select" @bind-Value="_newRelation.PersonId1">
+						@if (_newRelation.PersonId1 is null)
+						{
+							<option selected value="">None</option>
+						}
+						@foreach (var person in _persons)
+						{
+							<option value="@person.PersonId">@person.FirstName (ID: @person.PersonId)</option>
+						}
+						@if (_newRelation.PersonId1 is not null)
+						{
+							<option value="">None</option>
+						}
+					</InputSelect>*@
+				</td>
+			</tr>
+			<tr>
+				<td class="p-1">Relation</td>
+				<td class="p-1">
+					<InputText @bind-Value="_relation.RelationType" />
+				</td>
+			</tr>
+			<tr>
+				<td class="p-1">Person 2 Id</td>
+				<td class="p-1">
+					@*<InputNumber @bind-Value="_newRelation.PersonId2" />*@
+
+					@*<InputSelect class="form-select" @bind-Value="_newRelation.PersonId2">
+						@if (_newRelation.PersonId2 is null)
+						{
+							<option selected value="">None</option>
+						}
+						@foreach (var person in _persons)
+						{
+							<option value="@person.PersonId">@person.FirstName (ID: @person.PersonId)</option>
+						}
+						@if (_newRelation.PersonId2 is not null)
+						{
+							<option value="">None</option>
+						}
+					</InputSelect>*@
+				</td>
+			</tr>
+		</table>
+
+		<div class="row ">
+			<div class="col-md-6 d-flex align-items-end " style="margin-top: 16px;">
+				<RadzenButton class="butto_green_colour" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Click="@UpdateRelation" />
+				<RadzenButton ButtonStyle="ButtonStyle.Light" Icon="cancel" style="display: inline-block; margin-left: 10px;" Text="Cancel" Click="@Cancel" />
+			</div>
+		</div>
+
+	</div>
+</EditForm>
+
+
+@code {
+
+	#region Injections
+
+	[Inject]
+	private NavigationManager _navigationManager { get; set; }
+	[Inject]
+	private IPersonHandler _personHandler { get; set; }
+	[Inject]
+	private IRelationHandler _relationHandler { get; set; }
+
+	#endregion
+
+	[Parameter]
+	public int Id { get; set; }
+
+	//private Person _person;
+	//private IEnumerable<Person> _persons = Enumerable.Empty<Person>();
+
+	private Relation _relation;
+
+	protected override async Task OnInitializedAsync()
+	{
+		//_person = new();
+		_relation = new Relation();
+
+		//_persons = await _personHandler.GetAllPersons();
+		_relation = await _relationHandler.GetRelationById(Id);
+		
+	}
+
+	public async Task UpdateRelation()
+	{
+		await _relationHandler.UpdateRelation(_relation);
+		_navigationManager.NavigateTo("/family");
+	}
+
+	public void Cancel()
+	{
+		_navigationManager.NavigateTo("/family");
+	}
+}
