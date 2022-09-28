@@ -109,12 +109,12 @@ namespace PracticeProject.Components
 
         private async Task EditRelation(Relation relation)
         {
-            await _dialogService.OpenAsync<EditRelationComponent>($"Show RelationId: {relation.RelationId}",
+            await _dialogService.OpenAsync<EditRelationComponent>("Edit Relation",
                 new Dictionary<string, object>() { { "RelationId", relation.RelationId } },
                 new DialogOptions()
                 {
-                    Width = "500px",
-                    Height = "500px",
+                    Width = "700px",
+                    Height = "530px",
                     Resizable = true,
                     //Draggable = true,
                     CloseDialogOnOverlayClick = true,

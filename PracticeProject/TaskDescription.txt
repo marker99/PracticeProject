@@ -14,6 +14,9 @@ Har en øve-opgave, så ikke en opgave vi reelt kommer til er bruge i produktet,
 
 Todo:
 
-Add relations between people (kinda works)
-Edit relations
-Fancy
+Add relations between people (kinda works) you have to reload the page after each add or you get an error on the next add ??????
+Lav Dynamic components pænere 
+Relations liste med korrekte navne istedet for PersonId eller PracticeProject.Models.Relation
+Måske Dbcontext factory
+
+More Fancy

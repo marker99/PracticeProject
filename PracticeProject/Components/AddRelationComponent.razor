@@ -4,7 +4,57 @@
 @using PracticeProject.Resources
 @using ButtonType = Radzen.ButtonType
 
-<EditForm Model="@_newRelation" OnValidSubmit="@AddNewRelation">
+<RadzenTemplateForm Data="@_newRelation" OnInvalidSubmit="@AddNewRelation">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="container-fluid">
+        <div class="row">
+            <h3>Relation Information</h3>
+            <div class="col-md-3">
+                <RadzenFieldset>
+                    <div class="row">
+                        <div class="col-md-3 align-items-center d-flex">
+                            <RadzenLabel Text="Person 1 Name" />
+                        </div>
+                        <div class="col-md-7">
+                            <RadzenDropDown Style="width: 100%" AllowClear="true" TValue="int?" Data="@_persons" TextProperty="FirstName" ValueProperty="PersonId" @bind-Value="@_newRelation.PersonId1" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 align-items-center d-flex">
+                            <RadzenLabel Text="@StringResource.Relation" />
+                        </div>
+                        <div class="col-md-7">
+                            <RadzenTextBox Style="width: 100%" @bind-Value="_newRelation.RelationType" Name="Relation" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 align-items-center d-flex">
+                            <RadzenLabel Text="Person 2 Name" />
+                        </div>
+                        <div class="col-md-7">
+                            <RadzenDropDown Style="width: 100%" AllowClear="true" TValue="int?" Data="@_persons" TextProperty="FirstName" ValueProperty="PersonId" @bind-Value="@_newRelation.PersonId2" />
+                        </div>
+                    </div>
+                </RadzenFieldset>
+
+            </div>
+            <div class="row ">
+                <div class="col-md-3 d-flex align-items-end justify-content-center" style="margin-top: 16px;">
+                    <RadzenButton class="butto_green_colour" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Click="@AddNewRelation" />
+                    <RadzenButton ButtonStyle="ButtonStyle.Light" Icon="cancel" style="display: inline-block; margin-left: 10px;" Text="Cancel" Click="@Cancel" />
+                </div>
+            </div>
+        </div>
+    </div>
+</RadzenTemplateForm>
+
+
+@*First version of doing this*@
+
+@*<EditForm Model="@_newRelation" OnValidSubmit="@AddNewRelation">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -12,24 +62,21 @@
     <div class="form-group">
         <table class="border-bottom border-top border-dark m-2">
             <tr>
-                <td class="p-1">Person 1 Id</td>
+                <td class="p-1">Person 1</td>
                 <td class="p-1">
-                    @*<RadzenNumeric @bind-Value="_newRelation.PersonId1" ></RadzenNumeric>*@
-                    @*<InputNumber @bind-Value="_newRelation.PersonId1"/>*@
-
                     <InputSelect class="form-select" @bind-Value="_newRelation.PersonId1">
-                        @if (_newRelation.PersonId1 is null)
-                        {
-                            <option selected value="">None</option>
-                        }
-                        @foreach (var person in _persons)
-                        {
-                            <option value="@person.PersonId">@person.FirstName (ID: @person.PersonId)</option>
-                        }
-                        @if (_newRelation.PersonId1 is not null)
-                        {
-                            <option value="">None</option>
-                        }
+                    @if (_newRelation.PersonId1 is null)
+                    {
+                    <option selected value="">None</option>
+                    }
+                    @foreach (var person in _persons)
+                    {
+                    <option value="@person.PersonId">@person.FirstName (ID: @person.PersonId)</option>
+                    }
+                    @if (_newRelation.PersonId1 is not null)
+                    {
+                    <option value="">None</option>
+                    }
                     </InputSelect>
                 </td>
             </tr>
@@ -40,51 +87,33 @@
                 </td>
             </tr>
             <tr>
-                <td class="p-1">Person 2 Id</td>
+                <td class="p-1">Person 2</td>
                 <td class="p-1">
-                    @*<RadzenNumeric @bind-Value="_newRelation.PersonId2" ></RadzenNumeric>*@
-                    @*<InputNumber @bind-Value="_newRelation.PersonId2" />*@
-                    
                     <InputSelect class="form-select" @bind-Value="_newRelation.PersonId2">
-                        @if (_newRelation.PersonId2 is null)
-                        {
-                            <option selected value="">None</option>
-                        }
-                        @foreach (var person in _persons)
-                        {
-                            <option value="@person.PersonId">@person.FirstName (ID: @person.PersonId)</option>
-                        }
-                        @if (_newRelation.PersonId2 is not null)
-                        {
-                            <option value="">None</option>
-                        }
+                    @if (_newRelation.PersonId2 is null)
+                    {
+                    <option selected value="">None</option>
+                    }
+                    @foreach (var person in _persons)
+                    {
+                    <option value="@person.PersonId">@person.FirstName (ID: @person.PersonId)</option>
+                    }
+                    @if (_newRelation.PersonId2 is not null)
+                    {
+                    <option value="">None</option>
+                    }
                     </InputSelect>
                 </td>
             </tr>
         </table>
-        
+
         <div class="row ">
-        <div class="col-md-6 d-flex align-items-end " style="margin-top: 16px;">
-            <RadzenButton class="butto_green_colour" ButtonType="ButtonType.Submit" Icon="save" Text="Save" />
-            <RadzenButton ButtonStyle="ButtonStyle.Light" Icon="cancel" style="display: inline-block; margin-left: 10px;" Text="Cancel" Click="@Cancel" />
+            <div class="col-md-6 d-flex align-items-end " style="margin-top: 16px;">
+                <RadzenButton class="butto_green_colour" ButtonType="ButtonType.Submit" Icon="save" Text="Save" />
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Icon="cancel" style="display: inline-block; margin-left: 10px;" Text="Cancel" Click="@Cancel" />
+            </div>
         </div>
-    </div>
 
     </div>
-
-    
-
-
-
-    @*<RadzenDropDownDataGrid TValue="Person" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterOperator="StringFilterOperator.Contains"
-    AllowFiltering="true" AllowClear="true" PageSize="10" Placeholder="Select"
-    Data="@_persons" TextProperty="FirstName" ValueProperty="PersonId" Style="width:100%">
-    <Columns>
-    <RadzenDropDownDataGridColumn Property="PersonId" Title="@StringResource.FirstName" />
-    <RadzenDropDownDataGridColumn Property="LastName" Title="@StringResource.LastName" />
-    </Columns>
-    </RadzenDropDownDataGrid>*@
-
-</EditForm>
-
+</EditForm>*@
 

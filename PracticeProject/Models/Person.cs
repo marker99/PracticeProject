@@ -29,16 +29,16 @@ namespace PracticeProject.Models
         public List<Relation> Person1Relations { get; set; }
         public List<Relation> Person2Relations { get; set; }
 
-        public override string ToString()
-        {
-            return $"Id: {PersonId}" +
-                   $"\tFirst Name: {FirstName}" +
-                   $"\tLast Name: {LastName}" +
-                   $"\tAge: {Age}" +
-                   $"\tGender: {Gender}" +
-                   $"\tAddress: {Address}" +
-                   $"\tPhoneNumber: {PhoneNumber}";
-        }
+        //public override string ToString()
+        //{
+        //    return $"Id: {PersonId}" +
+        //           $"\tFirst Name: {FirstName}" +
+        //           $"\tLast Name: {LastName}" +
+        //           $"\tAge: {Age}" +
+        //           $"\tGender: {Gender}" +
+        //           $"\tAddress: {Address}" +
+        //           $"\tPhoneNumber: {PhoneNumber}";
+        //}
 
     }
 }
