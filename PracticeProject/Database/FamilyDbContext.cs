@@ -24,12 +24,12 @@ namespace PracticeProject.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Relation>()
-                .HasOne(x => x.person1)
+                .HasOne(x => x.Person1)
                 .WithMany(x => x.Person1Relations)
                 .HasForeignKey(x => x.PersonId1);
             
             modelBuilder.Entity<Relation>()
-                .HasOne(x => x.person2)
+                .HasOne(x => x.Person2)
                 .WithMany(x => x.Person2Relations)
                 .HasForeignKey(x => x.PersonId2)
                 .OnDelete(DeleteBehavior.NoAction);

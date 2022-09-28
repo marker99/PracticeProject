@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PracticeProject.Database;
 
@@ -11,9 +12,10 @@ using PracticeProject.Database;
 namespace PracticeProject.Migrations
 {
     [DbContext(typeof(FamilyDbContext))]
-    partial class FamilyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220928084636_model_relation_nullablevalues")]
+    partial class model_relation_nullablevalues
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -18,14 +18,14 @@ namespace PracticeProject.Components
 
         #endregion
 
-        private Person _person;
+        //private Person _person;
         private IEnumerable<Person> _persons = Enumerable.Empty<Person>();
 
         private Relation _newRelation;
 
         protected override async Task OnInitializedAsync()
         {
-            _person = new();
+            //_person = new();
             _newRelation = new Relation();
 
             _persons = await _personHandler.GetAllPersons();
@@ -35,7 +35,7 @@ namespace PracticeProject.Components
         public void AddNewRelation()
         {
             _relationHandler.AddNewRelationBetweenPeople(_newRelation);
-            navigationManager.NavigateTo("/family");
+            //navigationManager.NavigateTo("/");
 
         }
 

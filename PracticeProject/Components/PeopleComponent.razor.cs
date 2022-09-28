@@ -15,7 +15,11 @@ namespace PracticeProject.Components
         private IPersonHandler _personHandler { get; set; }
         [Inject]
         private IRelationHandler _relationHandler { get; set; }
-
+        [Inject]
+        private NavigationManager _navigationManager { get; set; }
+        [Inject]
+        private DialogService _dialogService { get; set; }
+        
         #endregion
 
         private RadzenDataGrid<Person>? _personDataGrid;
@@ -24,11 +28,7 @@ namespace PracticeProject.Components
         private bool _isPersonsLoading;
         private int _personCount;
 
-        //private RadzenDataGrid<Relation>? _relationDataGrid;
-        //private IList<Relation> _relations { get; set; }
-        //private bool isRelationsLoading;
-        //private int _relationsCount;
-
+        //Relation fields should be moved here
 
         string pagingSummaryFormat = "Displaying page {0} of {1} (total {2} records)";
         bool showPageSummary = true;
@@ -45,26 +45,13 @@ namespace PracticeProject.Components
             await Task.Yield();
 
             _persons = await _personHandler.GetAllPersons();
+            
             _personCount = _persons.Count();
 
             _isPersonsLoading = false;
 
             StateHasChanged();
         }
-
-        //public async Task LoadRelationData(LoadDataArgs args)
-        //{
-        //    isRelationsLoading = true;
-        //    await Task.Yield();
-
-        //    _relations = await _relationHandler.GetAllRelationsAsync();
-        //    _relationsCount = _relations.Count();
-
-        //    isRelationsLoading = false;
-
-        //    StateHasChanged();
-        //}
-
 
         public async Task UpdatePerson(Person person)
         {
@@ -93,5 +80,46 @@ namespace PracticeProject.Components
             _personDataGrid.CancelEditRow(person);
         }
 
+
+        private RadzenDataGrid<Relation>? _relationDataGrid;
+        private IList<Relation> _relations { get; set; }
+        private bool _isRelationsLoading;
+        private int _relationsCount;
+
+        
+        public async Task LoadRelationData(LoadDataArgs args)
+        {
+            _isRelationsLoading = true;
+            await Task.Yield();
+
+            _relations = await _relationHandler.GetAllRelations();
+            _relationsCount = _relations.Count();
+
+            _isRelationsLoading = false;
+
+            StateHasChanged();
+        }
+
+        public async Task DeleteRelation(int id)
+        {
+            await _relationHandler.RemoveRelation(id);
+            await _relationDataGrid.Reload();
+        }
+
+
+        private async Task EditRelation(int id)
+        {
+            await _dialogService.OpenAsync<EditRelationComponent>($"Show RelationId: {relation.RelationId}",
+                new Dictionary<string, object>() { { "RelationId", relation.RelationId } },
+                new DialogOptions()
+                {
+                    Width = "700px",
+                    Height = "530px",
+                    Resizable = true,
+                    Draggable = true,
+                    CloseDialogOnOverlayClick = true,
+                });
+            //_navigationManager.NavigateTo($"/editRelationComponent/{id}");
+        }
     }
 }

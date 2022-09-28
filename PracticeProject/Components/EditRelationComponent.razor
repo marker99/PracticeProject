@@ -13,10 +13,10 @@
 			<tr>
 				<td class="p-1">Person 1 Id</td>
 				<td class="p-1">
-					@*<InputNumber @bind-Value="_newRelation.PersonId1" />*@
+					<RadzenNumeric Disabled="true" ShowUpDown="false" @bind-Value="_relation.PersonId1"></RadzenNumeric>
+					@*<RadzenTextArea @bind-Value="_relation.person1.FirstName"></RadzenTextArea>*@
 
-
-					@*<InputSelect class="form-select" @bind-Value="_newRelation.PersonId1">
+                    @*<InputSelect class="form-select" @bind-Value="_newRelation.PersonId1">
 						@if (_newRelation.PersonId1 is null)
 						{
 							<option selected value="">None</option>
@@ -41,10 +41,9 @@
 			<tr>
 				<td class="p-1">Person 2 Id</td>
 				<td class="p-1">
-					@*<InputNumber @bind-Value="_newRelation.PersonId2" />*@
 
-					@*<InputSelect class="form-select" @bind-Value="_newRelation.PersonId2">
-						@if (_newRelation.PersonId2 is null)
+					<InputSelect  class="form-select" @bind-Value="_relation.PersonId2">
+						@if (_relation.PersonId2 is null)
 						{
 							<option selected value="">None</option>
 						}
@@ -52,18 +51,14 @@
 						{
 							<option value="@person.PersonId">@person.FirstName (ID: @person.PersonId)</option>
 						}
-						@if (_newRelation.PersonId2 is not null)
-						{
-							<option value="">None</option>
-						}
-					</InputSelect>*@
+                    </InputSelect>
 				</td>
 			</tr>
 		</table>
 
 		<div class="row ">
 			<div class="col-md-6 d-flex align-items-end " style="margin-top: 16px;">
-				<RadzenButton class="butto_green_colour" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Click="@UpdateRelation" />
+				<RadzenButton class="butto_green_colour" ButtonType="ButtonType.Submit" Icon="save" Text="Save" />
 				<RadzenButton ButtonStyle="ButtonStyle.Light" Icon="cancel" style="display: inline-block; margin-left: 10px;" Text="Cancel" Click="@Cancel" />
 			</div>
 		</div>
@@ -89,7 +84,8 @@
 	public int Id { get; set; }
 
 	//private Person _person;
-	//private IEnumerable<Person> _persons = Enumerable.Empty<Person>();
+	private IEnumerable<Person> _persons = Enumerable.Empty<Person>();
+    //private IEnumerable<Relation> _relations = Enumerable.Empty<Relation>();
 
 	private Relation _relation;
 
@@ -98,7 +94,8 @@
 		//_person = new();
 		_relation = new Relation();
 
-		//_persons = await _personHandler.GetAllPersons();
+		_persons = await _personHandler.GetAllPersons();
+	    //_relations = await _relationHandler.GetAllRelations();
 		_relation = await _relationHandler.GetRelationById(Id);
 		
 	}

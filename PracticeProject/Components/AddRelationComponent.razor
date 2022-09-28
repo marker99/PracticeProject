@@ -14,7 +14,8 @@
             <tr>
                 <td class="p-1">Person 1 Id</td>
                 <td class="p-1">
-                    @*<InputNumber @bind-Value="_newRelation.PersonId1" />*@
+                    @*<RadzenNumeric @bind-Value="_newRelation.PersonId1" ></RadzenNumeric>*@
+                    @*<InputNumber @bind-Value="_newRelation.PersonId1"/>*@
 
                     <InputSelect class="form-select" @bind-Value="_newRelation.PersonId1">
                         @if (_newRelation.PersonId1 is null)
@@ -41,8 +42,9 @@
             <tr>
                 <td class="p-1">Person 2 Id</td>
                 <td class="p-1">
+                    @*<RadzenNumeric @bind-Value="_newRelation.PersonId2" ></RadzenNumeric>*@
                     @*<InputNumber @bind-Value="_newRelation.PersonId2" />*@
-
+                    
                     <InputSelect class="form-select" @bind-Value="_newRelation.PersonId2">
                         @if (_newRelation.PersonId2 is null)
                         {
@@ -63,20 +65,15 @@
         
         <div class="row ">
         <div class="col-md-6 d-flex align-items-end " style="margin-top: 16px;">
-            <RadzenButton class="butto_green_colour" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Click="@AddNewRelation" />
+            <RadzenButton class="butto_green_colour" ButtonType="ButtonType.Submit" Icon="save" Text="Save" />
             <RadzenButton ButtonStyle="ButtonStyle.Light" Icon="cancel" style="display: inline-block; margin-left: 10px;" Text="Cancel" Click="@Cancel" />
         </div>
     </div>
 
     </div>
 
-    @*<p class="actions">
-    <butto_green_colour class="btn btn-outline-dark btn-primary" type="submit">Save Changes</butto_green_colour>
-    </p>*@
-
     
 
-    <RelationsComponent></RelationsComponent>
 
 
     @*<RadzenDropDownDataGrid TValue="Person" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterOperator="StringFilterOperator.Contains"
