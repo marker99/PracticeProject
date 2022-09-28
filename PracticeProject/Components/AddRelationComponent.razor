@@ -10,14 +10,22 @@
     <div class="container-fluid">
         <div class="row">
             <h3>Relation Information</h3>
-            <div class="col-md-3">
+            <div class="col-md-5">
                 <RadzenFieldset>
                     <div class="row">
                         <div class="col-md-3 align-items-center d-flex">
                             <RadzenLabel Text="Person 1 Name" />
                         </div>
                         <div class="col-md-7">
-                            <RadzenDropDown Style="width: 100%" AllowClear="true" TValue="int?" Data="@_persons" TextProperty="FirstName" ValueProperty="PersonId" @bind-Value="@_newRelation.PersonId1" />
+                            <RadzenDropDownDataGrid Style="width: 100%" AllowClear="true" PageSize="8" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                                    TValue="int" Data="@_persons" TextProperty="Person" ValueProperty="PersonId" @bind-Value="@_newRelation.PersonId1">
+                                <Columns>
+                                    <RadzenDropDownDataGridColumn Property="FirstName" Title="@StringResource.FirstName" />
+                                    <RadzenDropDownDataGridColumn Property="LastName" Title="@StringResource.LastName" />
+                                    <RadzenDropDownDataGridColumn Property="Gender" Title="@StringResource.Gender" Width="80px" />
+                                    <RadzenDropDownDataGridColumn Property="Age" Title="@StringResource.Age" Width="65px" />
+                                </Columns>
+                            </RadzenDropDownDataGrid>
                         </div>
                     </div>
 
@@ -35,12 +43,20 @@
                             <RadzenLabel Text="Person 2 Name" />
                         </div>
                         <div class="col-md-7">
-                            <RadzenDropDown Style="width: 100%" AllowClear="true" TValue="int?" Data="@_persons" TextProperty="FirstName" ValueProperty="PersonId" @bind-Value="@_newRelation.PersonId2" />
+                            <RadzenDropDownDataGrid Style="width: 100%" AllowClear="true" PageSize="8" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                                    TValue="int" Data="@_persons" TextProperty="Person" ValueProperty="PersonId" @bind-Value="@_newRelation.PersonId2">
+                                <Columns>
+                                    <RadzenDropDownDataGridColumn Property="FirstName" Title="@StringResource.FirstName" />
+                                    <RadzenDropDownDataGridColumn Property="LastName" Title="@StringResource.LastName" />
+                                    <RadzenDropDownDataGridColumn Property="Gender" Title="@StringResource.Gender" Width="80px" />
+                                    <RadzenDropDownDataGridColumn Property="Age" Title="@StringResource.Age" Width="65px" />
+                                </Columns>
+                            </RadzenDropDownDataGrid>
                         </div>
                     </div>
                 </RadzenFieldset>
-
             </div>
+
             <div class="row ">
                 <div class="col-md-3 d-flex align-items-end justify-content-center" style="margin-top: 16px;">
                     <RadzenButton class="butto_green_colour" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Click="@AddNewRelation" />

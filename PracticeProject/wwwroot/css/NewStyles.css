@@ -29,3 +29,8 @@
 .image{
     padding-bottom: 1em;
 }
+
+.rz-lookup-search input {
+    border-color: #0d7d87 !important;
+    border-width: 2.5px !important;
+}

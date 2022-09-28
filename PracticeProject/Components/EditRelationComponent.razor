@@ -90,7 +90,7 @@
                             <RadzenLabel Text="Person 1 Name" />
                         </div>
                         <div class="col-md-7">
-                            <RadzenDropDown Style="width: 100%" Disabled="true"  TValue="int?" Data="@_persons" TextProperty="FirstName" ValueProperty="PersonId" @bind-Value="@_relation.PersonId1" />
+                            <RadzenDropDown Style="width: 100%" Disabled="true"  TValue="int" Data="@_persons" TextProperty="FirstName" ValueProperty="PersonId" @bind-Value="@_relation.PersonId1" />
                         </div>
                     </div>
 
@@ -108,7 +108,15 @@
                             <RadzenLabel Text="Person 2 Name" />
                         </div>
                         <div class="col-md-7">
-                            <RadzenDropDown Style="width: 100%" AllowClear="true" TValue="int?" Data="@_persons" TextProperty="FirstName" ValueProperty="PersonId" @bind-Value="@_relation.PersonId2" />
+                            <RadzenDropDownDataGrid Style="width: 100%" AllowClear="true" PageSize="8" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                                                    TValue="int" Data="@_persons" TextProperty="Person" ValueProperty="PersonId" @bind-Value="@_relation.PersonId2">
+                                <Columns>
+                                    <RadzenDropDownDataGridColumn Property="FirstName" Title="@StringResource.FirstName" />
+                                    <RadzenDropDownDataGridColumn Property="LastName" Title="@StringResource.LastName" />
+                                    <RadzenDropDownDataGridColumn Property="Gender" Title="@StringResource.Gender" Width="80px" />
+                                    <RadzenDropDownDataGridColumn Property="Age" Title="@StringResource.Age" Width="65px" />
+                                </Columns>
+                            </RadzenDropDownDataGrid>
                         </div>
                     </div>
                 </RadzenFieldset>

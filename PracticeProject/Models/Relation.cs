@@ -7,10 +7,12 @@ namespace PracticeProject.Models
         [Key]
         public int RelationId { get; set; }
 
-        public int? PersonId1 { get; set; }
+        [Required]
+        public int PersonId1 { get; set; }
         public Person? Person1 { get; set; }
 
-        public int? PersonId2 { get; set; }
+        [Required]
+        public int PersonId2 { get; set; }
         public Person? Person2 { get; set; }
 
         [Required]
@@ -21,11 +23,10 @@ namespace PracticeProject.Models
         //{
         //    return $"RelationId: {RelationId}" +
         //           $"PersonId1: {PersonId1}" +
-        //           $"Person1: {person1}" +
+        //           $"Person1: {Person1}" +
         //           $"PersonId2: {PersonId2}" +
-        //           $"Person2: {person2}" +
+        //           $"Person2: {Person2}" +
         //           $"Relation: {RelationType}";
-
         //}
 
     }
