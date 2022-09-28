@@ -97,7 +97,7 @@
 
                     <RadzenDataGridColumn TItem="Relation" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="100px">
                         <Template Context="data">
-                            <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Light" Click="@(args => EditRelation(data.RelationId))" @onclick:stopPropagation="true">
+                            <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Light" Click="@(args => EditRelation(data))" @onclick:stopPropagation="true">
                             </RadzenButton>
                         </Template>
                     </RadzenDataGridColumn>

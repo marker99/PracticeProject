@@ -107,19 +107,20 @@ namespace PracticeProject.Components
         }
 
 
-        private async Task EditRelation(int id)
+        private async Task EditRelation(Relation relation)
         {
             await _dialogService.OpenAsync<EditRelationComponent>($"Show RelationId: {relation.RelationId}",
                 new Dictionary<string, object>() { { "RelationId", relation.RelationId } },
                 new DialogOptions()
                 {
-                    Width = "700px",
-                    Height = "530px",
+                    Width = "500px",
+                    Height = "500px",
                     Resizable = true,
-                    Draggable = true,
+                    //Draggable = true,
                     CloseDialogOnOverlayClick = true,
+                    CloseDialogOnEsc = true,
                 });
-            //_navigationManager.NavigateTo($"/editRelationComponent/{id}");
         }
+
     }
 }

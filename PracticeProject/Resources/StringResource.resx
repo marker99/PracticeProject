@@ -144,4 +144,7 @@
   <data name="Relation" xml:space="preserve">
     <value>Relation</value>
   </data>
+  <data name="RelationInformation" xml:space="preserve">
+    <value>Relation Information</value>
+  </data>
 </root>

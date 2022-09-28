@@ -140,5 +140,14 @@ namespace PracticeProject.Resources {
                 return ResourceManager.GetString("Relation", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Relation Information.
+        /// </summary>
+        internal static string RelationInformation {
+            get {
+                return ResourceManager.GetString("RelationInformation", resourceCulture);
+            }
+        }
     }
 }
