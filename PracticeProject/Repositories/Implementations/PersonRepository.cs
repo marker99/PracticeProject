@@ -7,45 +7,56 @@ namespace PracticeProject.Repositories.Implementations
 {
     public class PersonRepository : IPersonRepository
     {
-        private FamilyDbContext _dbContext;
+        private readonly IDbContextFactory<FamilyDbContext> _contextFactory;
 
-        public PersonRepository(FamilyDbContext dbContext)
+
+        public PersonRepository(IDbContextFactory<FamilyDbContext> contextFactory)
         {
-            _dbContext = dbContext;
+            _contextFactory = contextFactory;
         }
 
         public async Task<Person> AddNewPersonAsync(Person person)
         {
-            var entityEntry = await _dbContext.Persons.AddAsync(person);
-            await _dbContext.SaveChangesAsync();
+            await using var context = _contextFactory.CreateDbContext();
+
+            var entityEntry = await context.Persons.AddAsync(person);
+            await context.SaveChangesAsync();
 
             return entityEntry.Entity;
         }
 
         public async Task<IList<Person>> GetAllPersonsAsync()
         {
-            return await _dbContext.Persons.ToListAsync();
+            await using var context = _contextFactory.CreateDbContext();
+
+            return await context.Persons.ToListAsync();
         }
 
         public async Task<Person> GetPersonByIdAsync(int personId)
         {
-            return await _dbContext.Persons.FirstOrDefaultAsync(p => p.PersonId == personId);
+            await using var context = _contextFactory.CreateDbContext();
+
+            return await context.Persons.FirstOrDefaultAsync(p => p.PersonId == personId);
         }
 
         public async Task RemovePersonAsync(int id)
         {
-            Person personToDelete = await _dbContext.Persons.FirstOrDefaultAsync(x => x.PersonId == id);
+            await using var context = _contextFactory.CreateDbContext();
+
+            Person personToDelete = await context.Persons.FirstOrDefaultAsync(x => x.PersonId == id);
             if (personToDelete != null)
             {
-                _dbContext.Persons.Remove(personToDelete);
-                await _dbContext.SaveChangesAsync();
+                context.Persons.Remove(personToDelete);
+                await context.SaveChangesAsync();
             }
         }
 
         public async Task<Person> UpdatePersonAsync(Person person)
         {
-            EntityEntry<Person> entity = _dbContext.Persons.Update(person);
-            await _dbContext.SaveChangesAsync();
+            await using var context = _contextFactory.CreateDbContext();
+
+            EntityEntry<Person> entity = context.Persons.Update(person);
+            await context.SaveChangesAsync();
 
             return entity.Entity;
         }
@@ -54,13 +65,15 @@ namespace PracticeProject.Repositories.Implementations
         //Ignore this. Just used for adding some dummy data
         public void CreatePeopleAndPopulateDb()
         {
-            var existingRelations = _dbContext.Relations.Select(x => x);
-            _dbContext.Relations.RemoveRange(existingRelations);
+            using var context = _contextFactory.CreateDbContext();
+            {
+                var existingRelations = context.Relations.Select(x => x);
+                context.Relations.RemoveRange(existingRelations);
 
-            var existingPeople = _dbContext.Persons.Select(x => x);
-            _dbContext.Persons.RemoveRange(existingPeople);
+                var existingPeople = context.Persons.Select(x => x);
+                context.Persons.RemoveRange(existingPeople);
 
-            var peopleList = new List<Person>()
+                var peopleList = new List<Person>()
             {
                 new Person
                 {
@@ -147,12 +160,15 @@ namespace PracticeProject.Repositories.Implementations
 
             };
 
-            foreach (Person person in peopleList)
-            {
-                _dbContext.AddAsync(person);
+                foreach (Person person in peopleList)
+                {
+                    context.AddAsync(person);
+                }
+
+                context.SaveChangesAsync();
             }
 
-            _dbContext.SaveChangesAsync();
+
         }
 
 

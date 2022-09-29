@@ -14,14 +14,17 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<DialogService>();
 
-builder.Services.AddDbContext<FamilyDbContext>(ServiceLifetime.Transient);
+
 builder.Services.AddScoped<IPersonHandler, PersonHandler>();
 builder.Services.AddScoped<IRelationHandler, RelationHandler>();
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<IRelationRepository, RelationRepository>();
+builder.Services.AddDbContextFactory<FamilyDbContext>();
 
 
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
