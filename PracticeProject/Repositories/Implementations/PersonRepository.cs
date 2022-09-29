@@ -17,7 +17,7 @@ namespace PracticeProject.Repositories.Implementations
 
         public async Task<Person> AddNewPersonAsync(Person person)
         {
-            await using var context = _contextFactory.CreateDbContext();
+            await using var context = await _contextFactory.CreateDbContextAsync();
 
             var entityEntry = await context.Persons.AddAsync(person);
             await context.SaveChangesAsync();
@@ -27,21 +27,24 @@ namespace PracticeProject.Repositories.Implementations
 
         public async Task<IList<Person>> GetAllPersonsAsync()
         {
-            await using var context = _contextFactory.CreateDbContext();
+            await using var context = await _contextFactory.CreateDbContextAsync();
 
-            return await context.Persons.ToListAsync();
+            return await context.Persons
+                .Include(x => x.Person1Relations)
+                .Include(x => x.Person2Relations)
+                .ToListAsync();
         }
 
         public async Task<Person> GetPersonByIdAsync(int personId)
         {
-            await using var context = _contextFactory.CreateDbContext();
+            await using var context = await _contextFactory.CreateDbContextAsync();
 
             return await context.Persons.FirstOrDefaultAsync(p => p.PersonId == personId);
         }
 
         public async Task RemovePersonAsync(int id)
         {
-            await using var context = _contextFactory.CreateDbContext();
+            await using var context = await _contextFactory.CreateDbContextAsync();
 
             Person personToDelete = await context.Persons.FirstOrDefaultAsync(x => x.PersonId == id);
             if (personToDelete != null)
@@ -53,7 +56,7 @@ namespace PracticeProject.Repositories.Implementations
 
         public async Task<Person> UpdatePersonAsync(Person person)
         {
-            await using var context = _contextFactory.CreateDbContext();
+            await using var context = await _contextFactory.CreateDbContextAsync();
 
             EntityEntry<Person> entity = context.Persons.Update(person);
             await context.SaveChangesAsync();

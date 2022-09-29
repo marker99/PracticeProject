@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
+using PracticeProject.Components.DataManipulation;
 using PracticeProject.Data;
 using PracticeProject.Models;
-using Radzen.Blazor;
 using Radzen;
+using Radzen.Blazor;
 
-namespace PracticeProject.Components
+namespace PracticeProject.Components.Lists
 {
     public partial class RelationsComponent
     {
@@ -29,9 +30,12 @@ namespace PracticeProject.Components
         string pagingSummaryFormat = "Displaying page {0} of {1} (total {2} records)";
         bool showPageSummary = true;
 
+        private IEnumerable<Person> _persons { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
             base.OnInitialized();
+            _persons = await _personHandler.GetAllPersons();
         }
 
         public async Task LoadRelationData(LoadDataArgs args)

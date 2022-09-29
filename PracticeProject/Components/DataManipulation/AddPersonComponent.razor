@@ -13,48 +13,48 @@
             <div class="col-md-5">
                 <RadzenFieldset>
                     <div class="row">
-                        <div class="col-md-3 align-items-center d-flex">
+                        <div class="col-md-2 align-items-center d-flex">
                             <RadzenLabel Text="@StringResource.FirstName" />
                         </div>
                         <div class="col-md-8">
-                            <RadzenTextBox Style="width: 100%" @bind-Value="newPerson.FirstName" Name="FirstName" />
+                            <RadzenTextBox Style="width: 100%" @bind-Value="newPerson.FirstName" Name="FirstName" Placeholder="First name" />
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-3 align-items-center d-flex">
+                        <div class="col-md-2 align-items-center d-flex">
                             <RadzenLabel Text="@StringResource.LastName" />
                         </div>
                         <div class="col-md-8">
-                            <RadzenTextBox Style="width: 100%" @bind-Value="newPerson.LastName" Name="LastName" />
+                            <RadzenTextBox Style="width: 100%" @bind-Value="newPerson.LastName" Name="LastName" Placeholder="Last name"/>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-3 align-items-center d-flex">
+                        <div class="col-md-2 align-items-center d-flex">
                             <RadzenLabel Text="@StringResource.Address" />
                         </div>
                         <div class="col-md-8">
-                            <RadzenTextBox Style="width: 100%" @bind-Value="newPerson.Address" Name="Address" />
+                            <RadzenTextBox Style="width: 100%" @bind-Value="newPerson.Address" Name="Address" Placeholder="Address" />
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-3 align-items-center d-flex">
+                        <div class="col-md-2 align-items-center d-flex">
                             <RadzenLabel Text="@StringResource.PhoneNumber" />
                         </div>
                         <div class="col-md-8">
                             @*<RadzenTextBox Style="width: 100%" @bind-Value="newPerson.PhoneNumber" Name="PhoneNumber" />*@
-                            <RadzenMask Mask="********" CharacterPattern="[0-9]" Name="PhoneNumber" @bind-Value=@newPerson.PhoneNumber Style="width: 100%" />
+                            <RadzenMask Mask="********" CharacterPattern="[0-9]" Name="PhoneNumber" @bind-Value=@newPerson.PhoneNumber Style="width: 100%" Placeholder="Phone number" />
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-3 align-items-center d-flex ">
+                        <div class="col-md-2 align-items-center d-flex ">
                             <RadzenLabel Text="@StringResource.Age" />
                         </div>
                         <div class="col-md-3">
-                            <RadzenNumeric class="" Style="width: 100%" Name="Age" @bind-Value="newPerson.Age" />
+                            <RadzenNumeric class="" Style="width: 100%" Name="Age" @bind-Value="newPerson.Age" Placeholder="Age" />
                         </div>
 
                         <div class="col-md-1 align-items-center d-flex ">

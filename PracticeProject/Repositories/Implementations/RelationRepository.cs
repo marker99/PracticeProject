@@ -16,7 +16,7 @@ namespace PracticeProject.Repositories.Implementations
 
         public async Task<Relation> AddNewRelationBetweenPeopleAsync(Relation relation)
         {
-            await using var context = _contextFactory.CreateDbContext();
+            await using var context = await _contextFactory.CreateDbContextAsync();
             //await using var transaction = context.Database.BeginTransaction();
 
             //context.Database.Exe
@@ -30,21 +30,24 @@ namespace PracticeProject.Repositories.Implementations
 
         public async Task<IList<Relation>> GetAllRelationsAsync()
         {
-            await using var context = _contextFactory.CreateDbContext();
+            await using var context = await _contextFactory.CreateDbContextAsync();
 
-            return await context.Relations.ToListAsync();
+            return await context.Relations
+                .Include(x => x.Person1)
+                .Include(x => x.Person2)
+                .ToListAsync();
         }
 
         public async Task<Relation> GetRelationByIdAsync(int relationId)
         {
-            await using var context = _contextFactory.CreateDbContext();
+            await using var context = await _contextFactory.CreateDbContextAsync();
 
             return await context.Relations.FirstOrDefaultAsync(r => r.RelationId == relationId);
         }
 
         public async Task RemoveRelationAsync(int id)
         {
-            await using var context = _contextFactory.CreateDbContext();
+            await using var context = await _contextFactory.CreateDbContextAsync();
 
             Relation relationToDelete = await context.Relations.FirstOrDefaultAsync(x => x.RelationId == id);
             if (relationToDelete != null)
@@ -56,7 +59,7 @@ namespace PracticeProject.Repositories.Implementations
 
         public async Task<Relation> UpdateRelationAsync(Relation relation)
         {
-            await using var context = _contextFactory.CreateDbContext();
+            await using var context = await _contextFactory.CreateDbContextAsync();
 
             EntityEntry<Relation> entity = context.Update(relation);
             await context.SaveChangesAsync();

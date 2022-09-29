@@ -2,7 +2,7 @@
 using PracticeProject.Data;
 using PracticeProject.Models;
 
-namespace PracticeProject.Components
+namespace PracticeProject.Components.DataManipulation
 {
     public partial class AddPersonComponent
     {

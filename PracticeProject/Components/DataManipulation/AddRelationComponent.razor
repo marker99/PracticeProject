@@ -13,12 +13,12 @@
             <div class="col-md-5">
                 <RadzenFieldset>
                     <div class="row">
-                        <div class="col-md-3 align-items-center d-flex">
-                            <RadzenLabel Text="Person 1 Name" />
+                        <div class="col-md-2 align-items-center d-flex">
+                            <RadzenLabel Text="Person 1" />
                         </div>
                         <div class="col-md-7">
                             <RadzenDropDownDataGrid Style="width: 100%" AllowClear="true" PageSize="8" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                                    TValue="int" Data="@_persons" TextProperty="Person" ValueProperty="PersonId" @bind-Value="@_newRelation.PersonId1">
+                                                    TValue="int" Data="@_persons" TextProperty="Person" ValueProperty="PersonId" @bind-Value="@_newRelation.PersonId1" Placeholder="Pick the first person">
                                 <Columns>
                                     <RadzenDropDownDataGridColumn Property="FirstName" Title="@StringResource.FirstName" />
                                     <RadzenDropDownDataGridColumn Property="LastName" Title="@StringResource.LastName" />
@@ -30,21 +30,21 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-3 align-items-center d-flex">
+                        <div class="col-md-2 align-items-center d-flex">
                             <RadzenLabel Text="@StringResource.Relation" />
                         </div>
                         <div class="col-md-7">
-                            <RadzenTextBox Style="width: 100%" @bind-Value="_newRelation.RelationType" Name="Relation" />
+                            <RadzenTextBox Style="width: 100%" @bind-Value="_newRelation.RelationType" Name="Relation" Placeholder="What is their relation to each other" />
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-3 align-items-center d-flex">
-                            <RadzenLabel Text="Person 2 Name" />
+                        <div class="col-md-2 align-items-center d-flex">
+                            <RadzenLabel Text="Person 2" />
                         </div>
                         <div class="col-md-7">
                             <RadzenDropDownDataGrid Style="width: 100%" AllowClear="true" PageSize="8" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                                                    TValue="int" Data="@_persons" TextProperty="Person" ValueProperty="PersonId" @bind-Value="@_newRelation.PersonId2">
+                                                    TValue="int" Data="@_persons" TextProperty="Person" ValueProperty="PersonId" @bind-Value="@_newRelation.PersonId2" Placeholder="Pick the second person">
                                 <Columns>
                                     <RadzenDropDownDataGridColumn Property="FirstName" Title="@StringResource.FirstName" />
                                     <RadzenDropDownDataGridColumn Property="LastName" Title="@StringResource.LastName" />

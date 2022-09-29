@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.EntityFrameworkCore;
 using PracticeProject.Data;
 using PracticeProject.Models;
 using Radzen;
 using Radzen.Blazor;
 
-namespace PracticeProject.Components
+namespace PracticeProject.Components.Lists
 {
     public partial class PeopleComponent
     {

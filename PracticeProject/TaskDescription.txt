@@ -17,7 +17,7 @@ Todo:
 Add relations between people (kinda works) you have to reload the page after each add or you get an error on the next add ?????? 
 	- kunne ikke finde ud af hvorfor så har bare sat siden til at force reload 
 
-Relations liste med korrekte navne istedet for PersonId eller PracticeProject.Models.Relation
+Dialog popup for relations
 
 
 

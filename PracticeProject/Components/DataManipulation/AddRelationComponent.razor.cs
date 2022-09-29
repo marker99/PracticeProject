@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using PracticeProject.Data;
 using PracticeProject.Models;
-using System;
 
-namespace PracticeProject.Components
+namespace PracticeProject.Components.DataManipulation
 {
     public partial class AddRelationComponent
     {
