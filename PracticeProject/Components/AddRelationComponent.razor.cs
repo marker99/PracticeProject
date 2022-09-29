@@ -35,7 +35,7 @@ namespace PracticeProject.Components
         public void AddNewRelation()
         {
             _relationHandler.AddNewRelationBetweenPeople(_newRelation);
-            //navigationManager.NavigateTo("/");
+            navigationManager.NavigateTo("/mainPage", true);
 
         }
 

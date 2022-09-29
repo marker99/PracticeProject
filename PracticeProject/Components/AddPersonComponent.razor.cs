@@ -29,7 +29,7 @@ namespace PracticeProject.Components
         public void AddNewPerson()
         {
             _personHandler.AddNewPerson(newPerson);
-            _navigationManager.NavigateTo("/people");
+            _navigationManager.NavigateTo("/mainPage", true);
         }
 
         public void Cancel()
