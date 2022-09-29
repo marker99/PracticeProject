@@ -34,3 +34,12 @@
     border-color: #0d7d87 !important;
     border-width: 2.5px !important;
 }
+
+.rz-tabview-nav li a {
+    color: #07575f !important;
+    font-size: 1.1em !important
+}
+
+.rz-tabview-nav .rz-tabview-selected a {
+    color: black !important
+}

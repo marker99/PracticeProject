@@ -1,0 +1,24 @@
+﻿@page "/mainPage"
+@using PracticeProject.Components
+@using System.Collections
+
+<PageTitle>People</PageTitle>
+
+<RadzenTabs RenderMode="TabRenderMode.Client">
+    <Tabs>
+        <RadzenTabsItem Text="People">
+            <PeopleComponent/>
+        </RadzenTabsItem>
+
+        <RadzenTabsItem Text="Add People">
+            <AddPersonComponent/>
+        </RadzenTabsItem>
+
+        <RadzenTabsItem Text="Add Relation">
+            <AddRelationComponent/>
+        </RadzenTabsItem>
+        
+
+    </Tabs>
+
+</RadzenTabs>

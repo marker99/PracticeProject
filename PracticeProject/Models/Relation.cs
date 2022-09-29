@@ -29,5 +29,6 @@ namespace PracticeProject.Models
         //           $"Relation: {RelationType}";
         //}
 
+
     }
 }
