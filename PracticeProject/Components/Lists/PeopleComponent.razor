@@ -12,40 +12,47 @@
                             ShowPagingSummary="@showPageSummary" PagingSummaryFormat="@pagingSummaryFormat" RowUpdate="@UpdatePerson"
                             Count="@_personCount" IsLoading="@_isPersonsLoading" EditMode="DataGridEditMode.Single" @ref="_personDataGrid">
                 <Columns>
+                    @*<RadzenDataGridColumn TItem="Person" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="100px">
+                        <Template Context="data">
+                            <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Light" Click="@(args => ViewRelation(data))" @onclick:stopPropagation="true">
+                            </RadzenButton>
+                        </Template>
+                    </RadzenDataGridColumn>*@
+
                     <RadzenDataGridColumn TItem="Person" Property="FirstName" Title="@StringResource.FirstName">
                         <EditTemplate Context="person">
-                            <RadzenTextBox Style="width: 100%" @bind-Value="person.FirstName" Name="FirstName" />
+                            <RadzenTextBox Style="width: 100%" @bind-Value="person.FirstName" Name="FirstName"/>
                         </EditTemplate>
                     </RadzenDataGridColumn>
 
                     <RadzenDataGridColumn TItem="Person" Property="LastName" Title="@StringResource.LastName">
                         <EditTemplate Context="person">
-                            <RadzenTextBox Style="width: 100%" @bind-Value="person.LastName" Name="LastName" />
+                            <RadzenTextBox Style="width: 100%" @bind-Value="person.LastName" Name="LastName"/>
                         </EditTemplate>
                     </RadzenDataGridColumn>
 
                     <RadzenDataGridColumn TItem="Person" Property="Age" Title="@StringResource.Age">
                         <EditTemplate Context="person">
-                            <RadzenNumeric Style="width: 100%" Name="Age" @bind-Value="person.Age" />
+                            <RadzenNumeric Style="width: 100%" Name="Age" @bind-Value="person.Age"/>
                         </EditTemplate>
                     </RadzenDataGridColumn>
 
                     <RadzenDataGridColumn TItem="Person" Property="Gender" Title="@StringResource.Gender">
                         <EditTemplate Context="person">
                             <RadzenDropDown @bind-Value="person.Gender" AllowClear="true" Placeholder="Select gender"
-                                            Data="@_genderList" style="width: 100%;" Name="Gender" />
+                                            Data="@_genderList" style="width: 100%;" Name="Gender"/>
                         </EditTemplate>
                     </RadzenDataGridColumn>
 
                     <RadzenDataGridColumn TItem="Person" Property="Address" Title="@StringResource.Address">
                         <EditTemplate Context="person">
-                            <RadzenTextBox Style="width: 100%" @bind-Value="person.Address" Name="Address" />
+                            <RadzenTextBox Style="width: 100%" @bind-Value="person.Address" Name="Address"/>
                         </EditTemplate>
                     </RadzenDataGridColumn>
 
                     <RadzenDataGridColumn TItem="Person" Property="PhoneNumber" Title="@StringResource.PhoneNumber">
                         <EditTemplate Context="person">
-                            <RadzenMask Mask="********" CharacterPattern="[0-9]" Name="PhoneNumber" @bind-Value=@person.PhoneNumber Style="width: 100%" />
+                            <RadzenMask Mask="********" CharacterPattern="[0-9]" Name="PhoneNumber" @bind-Value=@person.PhoneNumber Style="width: 100%"/>
                         </EditTemplate>
                     </RadzenDataGridColumn>
 
@@ -55,7 +62,7 @@
                             </RadzenButton>
                         </Template>
                         <EditTemplate Context="person">
-                            <RadzenButton Icon="check" ButtonStyle="ButtonStyle.Primary" Class="butto_green_colour" Click="@((args) => SaveRow(person))">
+                            <RadzenButton Icon="check" ButtonStyle="ButtonStyle.Primary" Class="button_green_colour" Click="@((args) => SaveRow(person))">
                             </RadzenButton>
                             <RadzenButton Icon="close" ButtonStyle="ButtonStyle.Light" Class="rz-secondary" Click="@((args) => CancelEdit(person))">
                             </RadzenButton>

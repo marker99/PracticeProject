@@ -1,0 +1,103 @@
+﻿@page "/viewSpecificRelation/{Id:int}"
+
+
+@using Microsoft.AspNetCore.Components
+@using PracticeProject.Resources
+@using PracticeProject.Data
+@using PracticeProject.Models
+@using System.Diagnostics
+
+<RadzenTemplateForm Data="@_relation" OnInvalidSubmit="@UpdateRelation">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="container-fluid">
+        <div class="row">
+            <h3>Relation Information</h3>
+            <div class="col-md-10">
+                <RadzenFieldset>
+                    <div class="row">
+                        <div class="col-md-3 align-items-center d-flex">
+                            <RadzenLabel Text="Person 1 Name" />
+                        </div>
+                        <div class="col-md-7">
+                            <RadzenDropDown Style="width: 100%" Disabled="true" TValue="int" Data="@_persons" TextProperty="FirstName" ValueProperty="PersonId" @bind-Value="@_relation.PersonId1" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 align-items-center d-flex">
+                            <RadzenLabel Text="@StringResource.Relation" />
+                        </div>
+                        <div class="col-md-7">
+                            <RadzenTextBox Style="width: 100%" @bind-Value="_relation.RelationType" Name="Relation" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 align-items-center d-flex">
+                            <RadzenLabel Text="Person 2 Name" />
+                        </div>
+                        <div class="col-md-7">
+                            <RadzenDropDown Style="width: 100%" Disabled="true" TValue="int" Data="@_persons" TextProperty="FirstName" ValueProperty="PersonId" @bind-Value="@_relation.PersonId2" />
+
+                        </div>
+                    </div>
+                </RadzenFieldset>
+
+            </div>
+            @*<div class="row ">
+            <div class="col-md-10 d-flex align-items-end justify-content-center" style="margin-top: 16px;">
+            <RadzenButton class="button_green_colour" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Click="@UpdateRelation" />
+            <RadzenButton ButtonStyle="ButtonStyle.Light" Icon="cancel" style="display: inline-block; margin-left: 10px;" Text="Cancel" Click="@Cancel" />
+            </div>
+            </div>*@
+        </div>
+    </div>
+</RadzenTemplateForm>
+
+
+
+@code {
+    #region Injections
+
+    [Inject]
+    private NavigationManager _navigationManager { get; set; }
+    [Inject]
+    private IPersonHandler _personHandler { get; set; }
+    [Inject]
+    private IRelationHandler _relationHandler { get; set; }
+
+    #endregion
+
+    [Parameter]
+    public int PersonId { get; set; }
+
+    private IEnumerable<Person> _persons = Enumerable.Empty<Person>();
+
+    private Relation _relation;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _relation = new Relation();
+
+        _persons = await _personHandler.GetAllPersons();
+        //_relation = await _relationHandler.GetRelationById(RelationId);
+
+    }
+
+    public async Task UpdateRelation()
+    {
+        await _relationHandler.UpdateRelation(_relation);
+        _navigationManager.NavigateTo("/mainPage", true);
+    }
+
+    public void OnChange(object value, string name)
+    {
+        Debug.WriteLine($"{name} value changed to {_relation.PersonId2}");
+    }
+
+    public void Cancel()
+    {
+        _navigationManager.NavigateTo("/family");
+    }
+}
